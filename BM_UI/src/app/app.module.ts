@@ -7,7 +7,7 @@ import { EmployeesListComponent } from './components/employees/employees-list/em
 import { HttpClientModule } from '@angular/common/http';
 import { AddEmployeeComponent } from './components/employees/add-employee/add-employee.component';
 import { FormsModule } from '@angular/forms';
-import { EditEmployeeComponent } from './components/employees/edit-employee/edit-employee.component';
+
 import { ViewEmployeeComponent } from './components/employees/view-employee/view-employee.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -16,7 +16,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppComponent,
     EmployeesListComponent,
     AddEmployeeComponent,
-    EditEmployeeComponent,
     ViewEmployeeComponent,
   ],
   imports: [
