@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aVxAMgPLqe/QOd1tQUx+Nd9SEADKt0sEfgRk7TPiD2w9aR6Yc0N+2Q8rQRUFRgDnwqNvmIfep6BRVAoM3fgRFw==",
+  "dgSpecHash": "EymJro1ty3ft6jPPW/DPW1AF9mZ4Uxep7mZOsCiDgtXLRMq4vZsBhBK58VuBco5C5A2bekCbOlPFXZsS2r92Rg==",
   "success": true,
-  "projectFilePath": "D:\\BusinessManagerRepo\\BM_API\\BM_API\\BM_API.csproj",
+  "projectFilePath": "D:\\BusinessManagerRepo\\BM_API\\BM_API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\40749\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\40749\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
