@@ -1,9 +1,9 @@
 import { EmployeesService } from './../../../services/employees/employees.service';
 import { Component, OnInit } from '@angular/core';
 import { Employee } from 'src/app/models/employee.model';
-import { EditEmployeeComponent } from '../edit-employee/edit-employee.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
+import { ViewEmployeeComponent } from '../view-employee/view-employee.component';
 
 @Component({
   selector: 'app-employees-list',
@@ -23,7 +23,7 @@ export class EmployeesListComponent implements OnInit {
   }
 
   openEditModal(employee:Employee){
-    const modalRef = this.modalService.open(EditEmployeeComponent);
+    const modalRef = this.modalService.open(ViewEmployeeComponent);
     modalRef.componentInstance.employee = { ...employee };
   }
 

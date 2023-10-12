@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Employee } from 'src/app/models/employee.model';
 import { EmployeesService } from 'src/app/services/employees/employees.service';
@@ -18,7 +19,8 @@ export class AddEmployeeComponent implements OnInit {
     salary:0,
     department:''
   };
-  constructor(private employeeService:EmployeesService, private modalService:NgbModal) { }
+  constructor(private employeeService:EmployeesService, private modalService:NgbModal, private route:ActivatedRoute,
+    private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -28,8 +30,13 @@ export class AddEmployeeComponent implements OnInit {
       next:(tmpEmployee)=>{
         console.log(tmpEmployee);
         this.modalService.dismissAll();
+        this.router.navigate(['employees']);
       }
     })
+  }
+  onButtonClose(){
+    this.modalService.dismissAll();
+    this.router.navigate(['employees']);
   }
 
 }

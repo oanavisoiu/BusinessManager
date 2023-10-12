@@ -1,11 +1,10 @@
-<div>
-  <button type="button" class="btn btn-primary" (click)="openAddEmployeeModal()">
-    Add Employee
-  </button>
-</div>
-
 <div class="container my-5">
   <h1 class="mb-3">Employees </h1>
+  <div class="my-5">
+    <button type="button" class="btn btn-primary" [routerLink]="['/employees/add']" (click)="openAddEmployeeModal()">
+      Add Employee
+    </button>
+  </div>
   <table class="table" *ngIf="employees && employees.length >0">
     <thead>
       <tr>
@@ -27,7 +26,7 @@
         <td>{{employee.salary}}</td>
         <td>{{employee.department}}</td>
         <td>
-          <button type="button" class="btn btn-primary" (click)="openEditModal(employee)">
+          <button type="button" class="btn btn-primary" [routerLink]="['/employees', 'view', employee.id]" (click)="openEditModal(employee)">
             Edit Employee
           </button>
           <!-- <i type="button" class="bi bi-trash"></i> -->
@@ -37,4 +36,3 @@
   </table>
   <p *ngIf="!employees || employees.length==0">No employees found</p>
 </div>
-<app-add-employee></app-add-employee>
