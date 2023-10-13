@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeesListComponent } from './components/employees/employees-list/employees-list.component';
+import { LoginComponent } from './components/authentication/login/login.component';
+import { AuthenticationComponent } from './components/authentication/authentication/authentication.component';
 
 
 const routes: Routes = [
@@ -19,6 +21,18 @@ const routes: Routes = [
   {
     path:'employees/view/:id',
     component: EmployeesListComponent
+  },
+  {
+    path:'authentication/login',
+    component: AuthenticationComponent
+  },
+  {
+    path:'authentication',
+    component: AuthenticationComponent
+  },
+  {
+    path:'authentication/register',
+    component: AuthenticationComponent
   },
 ];
 

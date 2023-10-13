@@ -10,6 +10,10 @@ import { FormsModule } from '@angular/forms';
 
 import { ViewEmployeeComponent } from './components/employees/view-employee/view-employee.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from './components/authentication/login/login.component';
+import { NavbarComponent } from './components/homepage/navbar/navbar.component';
+import { AuthenticationComponent } from './components/authentication/authentication/authentication.component';
+import { RegisterComponent } from './components/authentication/register/register.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +21,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     EmployeesListComponent,
     AddEmployeeComponent,
     ViewEmployeeComponent,
+    LoginComponent,
+    NavbarComponent,
+    AuthenticationComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
