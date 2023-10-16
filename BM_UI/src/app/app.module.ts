@@ -9,11 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { ViewEmployeeComponent } from './components/employees/view-employee/view-employee.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/homepage/navbar/navbar.component';
-
-import { NotFoundComponent } from './shared/components/errors/not-found/not-found.component';
-import { ValidationMessagesComponent } from './shared/components/errors/validation-messages/validation-messages.component';
 import { HomeComponent } from './components/homepage/home/home.component';
-import { AccountComponent } from './components/account/account/account.component';
 import { AccountModule } from './components/account/account.module';
 
 @NgModule({
@@ -23,10 +19,7 @@ import { AccountModule } from './components/account/account.module';
     AddEmployeeComponent,
     ViewEmployeeComponent,
     NavbarComponent,
-    NotFoundComponent,
-    ValidationMessagesComponent,
     HomeComponent,
-    AccountComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +27,7 @@ import { AccountModule } from './components/account/account.module';
     HttpClientModule,
     FormsModule,
     NgbModule,
-    AccountModule
+    AccountModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

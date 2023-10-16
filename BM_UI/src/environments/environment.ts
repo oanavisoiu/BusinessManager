@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseApiUrl:'https://localhost:7185'
+  baseApiUrl:'https://localhost:7185',
+  userKey:'BusinessManagerUser'
 };
 
 /*

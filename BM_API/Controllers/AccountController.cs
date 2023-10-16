@@ -26,10 +26,10 @@ namespace BM_API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto model)
         {
-            var user = await userManager.FindByNameAsync(model.Username);
+            var user = await userManager.FindByNameAsync(model.Email);
             if (user == null)
             {
-                return Unauthorized("Invalid user or password");
+                return Unauthorized("Invalid email or password");
             }
             if (user.EmailConfirmed == false)
             {
@@ -38,7 +38,7 @@ namespace BM_API.Controllers
             var result = await signInManager.CheckPasswordSignInAsync(user, model.Password, false);
             if (!result.Succeeded)
             {
-                return Unauthorized("Invalid Usernae or password");
+                return Unauthorized("Invalid email or password");
             }
             return CreateApplicationUserDto(user);
 
@@ -60,10 +60,13 @@ namespace BM_API.Controllers
                 EmailConfirmed = true
             };
             var result =await userManager.CreateAsync(userToAdd, model.Password);
-            if (!result.Succeeded) { 
-            return BadRequest(result.Errors);
+
+            if (!result.Succeeded) 
+            { 
+            return BadRequest("Password should have at least one uppercase, one lowercase and one digit.");
             }
-            return Ok("Your account has been created");
+
+            return Ok(new JsonResult(new{ title="Account created", message= "Your account has been created" }));
         }
 
         #region Private Helper Methods
