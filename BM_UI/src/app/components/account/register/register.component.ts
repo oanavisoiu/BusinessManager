@@ -81,4 +81,7 @@ export class RegisterComponent implements OnInit {
       });
     }
   }
+  onBack(){
+    this.router.navigate(['/account']);
+  }
 }

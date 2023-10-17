@@ -86,5 +86,9 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  onBack()
+  {
+    this.router.navigate(['/account']);
+  }
 
 }

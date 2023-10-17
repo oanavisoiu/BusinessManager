@@ -22,8 +22,8 @@ export class AuthorizationGuard{
           return true;
         }
         else{
-          this.sharedService.showNotification(false,'Restricted area', 'Leavve now');
-          this.router.navigate(['account/login'], {queryParams: {returnUrl:state.url}});
+          this.sharedService.showNotification(false,'Restricted area', 'You have to login to access this page.');
+          this.router.navigate(['account'], {queryParams: {returnUrl:state.url}});
           return false;
         }
       }
