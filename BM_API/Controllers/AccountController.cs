@@ -1,10 +1,12 @@
 ﻿using BM_API.DTOs.Account;
 using BM_API.Models;
 using BM_API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace BM_API.Controllers
 {
@@ -21,6 +23,14 @@ namespace BM_API.Controllers
             this.jwtService = jwtService;
             this.signInManager = signInManager;
             this.userManager = userManager;
+        }
+
+        [Authorize]
+        [HttpGet("refresh-user-token")]
+        public async Task<ActionResult<UserDto>> RefreshUserToken()
+        {
+            var user = await userManager.FindByNameAsync(User.FindFirst(ClaimTypes.Email)?.Value);
+            return CreateApplicationUserDto(user);
         }
 
         [HttpPost("login")]
