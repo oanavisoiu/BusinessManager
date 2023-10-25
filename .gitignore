@@ -368,3 +368,6 @@ FodyWeavers.xsd
 /.npm
 /.yarn
 /yarn-error.log
+
+#Personal ignorable files
+appsettings.json

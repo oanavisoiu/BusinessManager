@@ -11,12 +11,13 @@ const routes: Routes = [
     runGuardsAndResolvers:'always',
     canActivate:[AuthorizationGuard],
     children:[
-      { path: '', component: HomeComponent },
+      { path: 'home', component: HomeComponent },
       {path:'employees', component:EmployeesListComponent},
       { path: 'employees/add', component: EmployeesListComponent },
       { path: 'employees/view/:id', component: EmployeesListComponent },
     ]
   },
+
   {
     path: 'account',
     loadChildren: () =>

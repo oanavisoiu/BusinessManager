@@ -21,6 +21,7 @@ builder.Services.AddDbContext<BMDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("BMConnectionString")));
 
 builder.Services.AddScoped<JWTService>();
+builder.Services.AddScoped<EmailService>();
 
 builder.Services.AddIdentityCore<User>(options =>
 {

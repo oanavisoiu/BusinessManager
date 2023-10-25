@@ -8,9 +8,9 @@ import { AddEmployeeComponent } from './components/employees/add-employee/add-em
 import { FormsModule } from '@angular/forms';
 import { ViewEmployeeComponent } from './components/employees/view-employee/view-employee.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NavbarComponent } from './components/homepage/navbar/navbar.component';
 import { HomeComponent } from './components/homepage/home/home.component';
 import { AccountModule } from './components/account/account.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,6 @@ import { AccountModule } from './components/account/account.module';
     EmployeesListComponent,
     AddEmployeeComponent,
     ViewEmployeeComponent,
-    NavbarComponent,
     HomeComponent,
   ],
   imports: [
@@ -28,6 +27,7 @@ import { AccountModule } from './components/account/account.module';
     FormsModule,
     NgbModule,
     AccountModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

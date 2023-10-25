@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationComponent } from './components/modals/notification/notification.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 
@@ -14,7 +15,8 @@ import { NotificationComponent } from './components/modals/notification/notifica
   declarations: [
     NotFoundComponent,
     ValidationMessagesComponent,
-    NotificationComponent
+    NotificationComponent,
+    NavbarComponent
   ],
   imports: [
     CommonModule,
@@ -29,6 +31,7 @@ import { NotificationComponent } from './components/modals/notification/notifica
     HttpClientModule,
     ValidationMessagesComponent,
     NgbModalModule,
+    NavbarComponent
   ]
 })
 export class SharedModule { }

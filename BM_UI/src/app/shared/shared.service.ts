@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 import { NotificationComponent } from './components/modals/notification/notification.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
