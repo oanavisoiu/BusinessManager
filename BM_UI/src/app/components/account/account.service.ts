@@ -2,9 +2,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReplaySubject, map } from 'rxjs';
-import { Login } from 'src/app/shared/models/login.model';
-import { Register } from 'src/app/shared/models/register.model';
-import { User } from 'src/app/shared/models/user.model';
+import { ConfirmEmail } from 'src/app/shared/models/account/confirm-email.model';
+import { Login } from 'src/app/shared/models/account/login.model';
+import { Register } from 'src/app/shared/models/account/register.model';
+import { ResetPassword } from 'src/app/shared/models/account/reset-password.model';
+import { User } from 'src/app/shared/models/account/user.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -15,7 +17,7 @@ export class AccountService {
   private userSource = new ReplaySubject<User | null>(1);
   user$ = this.userSource.asObservable();
 
-  constructor(private http: HttpClient, private router:Router) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   refreshUser(jwt: string | null) {
     if (jwt == null) {
@@ -41,7 +43,9 @@ export class AccountService {
   register(model: Register) {
     return this.http.post(this.baseApiUrl + '/api/Account/register', model);
   }
-
+confirmEmail(model:ConfirmEmail) {
+    return this.http.put(this.baseApiUrl + '/api/Account/confirm-email',model);
+  }
   login(model: Login) {
     return this.http
       .post<User>(this.baseApiUrl + '/api/Account/login', model)
@@ -54,10 +58,21 @@ export class AccountService {
       );
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem(environment.userKey);
     this.userSource.next(null);
     this.router.navigateByUrl('/account');
+  }
+
+  resendEmailConfirmationLink(email:string)
+  {
+    return this.http.post(this.baseApiUrl+'/api/Account/resend-email-confirmation-link/'+email,{});
+  }
+  forgotUsernameorPassword(email:string){
+    return this.http.post(this.baseApiUrl+'/api/Account/forgot-username-or-password/'+email,{});
+  }
+  resetPassword(model:ResetPassword){
+    return this.http.put(this.baseApiUrl+'/api/Account/reset-password',model);
   }
 
   getJWT() {

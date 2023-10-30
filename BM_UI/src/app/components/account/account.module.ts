@@ -5,12 +5,16 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AccountComponent } from './account/account.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { SendEmailComponent } from './send-email/send-email.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
-    AccountComponent
+    AccountComponent,
+    SendEmailComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,

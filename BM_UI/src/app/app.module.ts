@@ -11,6 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './components/homepage/home/home.component';
 import { AccountModule } from './components/account/account.module';
 import { SharedModule } from './shared/shared.module';
+import { ConfirmEmailComponent } from './components/account/confirm-email/confirm-email.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { SharedModule } from './shared/shared.module';
     AddEmployeeComponent,
     ViewEmployeeComponent,
     HomeComponent,
+    ConfirmEmailComponent,
   ],
   imports: [
     BrowserModule,

@@ -21,9 +21,12 @@
               Password is required.
             </div>
           </div>
-          <a class="password mt-5" href="">I forgot my password</a>
-          <div class="form-floating">
+          <a class="password mt-5" routerLink="/account/send-email/forgot-username-or-password">I forgot my password</a>
+          <div class="form-floating" *ngIf="errorMessages.length > 0">
             <app-validation-messages [errorMessages]="errorMessages"></app-validation-messages>
+            <a class="btn btn-link" (click)="resendEmailConfirmationLink()" *ngIf="errorMessages[0].includes('Please confirm your email.')">
+              Click here to resend email confirmation link.
+            </a>
           </div>
           <div>
             <button class="btn btn-primary me-3" type="submit">Login</button>

@@ -49,7 +49,7 @@ namespace BM_API.Controllers
             }
             if (user.EmailConfirmed == false)
             {
-                return Unauthorized("Verify your email");
+                return Unauthorized("Please confirm your email.");
             }
             var result = await signInManager.CheckPasswordSignInAsync(user, model.Password, false);
             if (!result.Succeeded)
@@ -85,7 +85,7 @@ namespace BM_API.Controllers
             {
                 if (await SendConfirmEmailAsync(userToAdd))
                 {
-                    return Ok(new JsonResult(new { title = "Created account", message = "Your account has successfully been created! Please confirm your email adress." }));
+                    return Ok(new JsonResult(new { title = "Email sent", message = "Check your email to confirm your email." }));
                 }
                 return BadRequest("Failed to send email.Try contact the admin.");
             } catch (Exception) {
