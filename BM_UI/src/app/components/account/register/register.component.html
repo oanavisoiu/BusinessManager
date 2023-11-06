@@ -1,0 +1,63 @@
+<div class="d-flex justify-content-center align-items-center my-2">
+  <div class="register-form border rounded">
+    <div class="d-flex justify-content-center align-items-center p-3">
+      <div>
+        <h3 class="my-5">Register</h3>
+        <form [formGroup]="registerForm" (ngSubmit)="register()" autocomplete="off">
+          <div class="my-5">
+
+            <div class="input-group input-group-sm mb-2">
+              <span class="input-group-text">First Name</span>
+              <input type="text" formControlName="firstName" class="form-control"
+                [class.is-invalid]="submitted && registerForm.get('firstName')?.errors">
+            </div>
+            <div class="text-danger mb-2" *ngIf="submitted && registerForm.get('firstName')?.hasError('required')">First
+              name is required.</div>
+            <div class="text-danger mb-2" *ngIf="submitted && (registerForm.get('firstName')?.hasError('minlength') ||
+      registerForm.get('firstName')?.hasError('maxlength'))">First name must be at least 3 characters and max 15
+              characters.</div>
+
+            <div class="input-group input-group-sm mb-2">
+              <span class="input-group-text" id="lastName">Last Name</span>
+              <input type="text" formControlName="lastName" class="form-control"
+                [class.is-invalid]="submitted && registerForm.get('lastName')?.errors">
+            </div>
+            <div class="text-danger mb-2" *ngIf="submitted && registerForm.get('lastName')?.hasError('required')">Last
+              name is required.</div>
+            <div class="text-danger mb-2" *ngIf="submitted && registerForm.get('lastName')?.hasError('minlength') ||
+      registerForm.get('lastName')?.hasError('maxlength')">Last name must be at least 3 characters and max 15
+              characters.</div>
+
+            <div class="input-group input-group-sm mb-2">
+              <span class="input-group-text" id="email">Email</span>
+              <input type="text" formControlName="email" class="form-control"
+                [class.is-invalid]="submitted && registerForm.get('email')?.errors">
+            </div>
+            <div class="text-danger mb-2" *ngIf="submitted && registerForm.get('email')?.hasError('required')">Email is
+              required.</div>
+            <div class="text-danger mb-2" *ngIf="submitted && registerForm.get('email')?.hasError('pattern')">Invalid
+              email adress.</div>
+
+            <div class="input-group input-group-sm mb-2">
+              <span class="input-group-text" id="password">Password</span>
+              <input type="password" formControlName="password" class="form-control"
+                [class.is-invalid]="submitted && registerForm.get('password')?.errors">
+            </div>
+            <div class="text-danger mb-2" *ngIf="submitted && registerForm.get('password')?.hasError('required')">
+              Password
+              is required.</div>
+            <div class="text-danger mb-2" *ngIf="submitted && registerForm.get('password')?.hasError('minlength') ||
+      registerForm.get('password')?.hasError('maxlength')">Password must be at least 3 characters and max 15
+              characters.</div>
+            <a class="password mt-5" href="/account/login">I already have an account.</a>
+            <div class="form-floating" *ngIf="errorMessages.length>0">
+              <app-validation-messages [errorMessages]="errorMessages"></app-validation-messages>
+            </div>
+          </div>
+          <button class="btn btn-primary me-3" type="submit">Register</button>
+          <button class="btn btn-secondary" type="button" (click)="onBack()">Back</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 import { EmployeesService } from './../../../services/employees/employees.service';
 import { Component, OnInit } from '@angular/core';
-import { Employee } from 'src/app/models/employee.model';
+import { Employee } from 'src/app/shared/models/employee.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 import { ViewEmployeeComponent } from '../view-employee/view-employee.component';

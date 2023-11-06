@@ -361,3 +361,13 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Ignore Angular cache files
+/dist
+/node_modules
+/.npm
+/.yarn
+/yarn-error.log
+
+#Personal ignorable files
+appsettings.json
