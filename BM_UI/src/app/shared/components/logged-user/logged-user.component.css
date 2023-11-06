@@ -1,0 +1,15 @@
+.logged-user{
+  border:none;
+  outline: none;
+}
+.profile-name{
+  font-size: 16px;
+  text-transform:capitalize;
+  text-align: left;
+}
+.business-name {
+  font-size: 12px;
+  text-transform:capitalize;
+  text-align: left;
+}
+

@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationComponent } from './components/modals/notification/notification.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { LoggedUserComponent } from './components/logged-user/logged-user.component';
 
 
 
@@ -16,7 +17,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     NotFoundComponent,
     ValidationMessagesComponent,
     NotificationComponent,
-    NavbarComponent
+    NavbarComponent,
+    LoggedUserComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     HttpClientModule,
     ValidationMessagesComponent,
     NgbModalModule,
-    NavbarComponent
+    NavbarComponent,
+    LoggedUserComponent
   ]
 })
 export class SharedModule { }

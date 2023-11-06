@@ -131,7 +131,7 @@ namespace BM_API.Controllers
             if (user.EmailConfirmed == true) return BadRequest("Your email address was confirmed before. Please login to your account.");
             try
             {
-                if(await SendConfirmEmailAsync(user)) return Ok(new JsonResult(new { title = "Created account", message = "Your account has successfully been created! Please confirm your email adress." }));
+                if(await SendConfirmEmailAsync(user)) return Ok(new JsonResult(new { title = "Email sent", message = "Check your email to confirm your email." }));
                 return BadRequest("Fail to send email. Please contact admin.");
             }
             catch(Exception)

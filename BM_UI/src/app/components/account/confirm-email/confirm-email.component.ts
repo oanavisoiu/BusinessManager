@@ -21,7 +21,7 @@ export class ConfirmEmailComponent implements OnInit {
     this.accountService.user$.pipe(take(1)).subscribe({
       next:(user:User | null)=>{
         if(user){
-          this.router.navigateByUrl("/");
+          this.router.navigateByUrl('/');
         }else{
           this.activatedRoute.queryParamMap.subscribe({
             next:(params:any)=>{

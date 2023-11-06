@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BM_API.Controllers
 {
-    [Authorize]
+    
     [ApiController]
     [Route("api/[controller]")]
     public class EmployeesController : Controller

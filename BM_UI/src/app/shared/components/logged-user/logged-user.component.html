@@ -1,0 +1,16 @@
+<div class="dropdown" *ngIf="(accountService.user$ | async) as user">
+
+  <button class="btn logged-user" type="button" data-bs-toggle="dropdown">
+    <div class="button-content">
+      <div class="profile-name">{{user.firstName}} {{user.lastName}}</div>
+      <div class="business-name">businessNamedfws gvergerghergegre</div>
+    </div>
+
+  </button>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <a class="dropdown-item" href="#">Profile</a>
+    <a class="dropdown-item" href="#">Settings</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" (click)="logout()">Logout</a>
+  </div>
+</div>

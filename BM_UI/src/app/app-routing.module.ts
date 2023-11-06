@@ -6,18 +6,21 @@ import { NotFoundComponent } from './shared/components/errors/not-found/not-foun
 import { AuthorizationGuard } from './shared/guards/authorization.guard';
 
 const routes: Routes = [
-  {
-    path:'',
-    runGuardsAndResolvers:'always',
-    canActivate:[AuthorizationGuard],
-    children:[
-      { path: 'home', component: HomeComponent },
-      {path:'employees', component:EmployeesListComponent},
-      { path: 'employees/add', component: EmployeesListComponent },
-      { path: 'employees/view/:id', component: EmployeesListComponent },
-    ]
-  },
-
+  // {
+  //   path:'',
+  //   runGuardsAndResolvers:'always',
+  //   canActivate:[AuthorizationGuard],
+  //   children:[
+  //     { path: 'home', component: HomeComponent },
+  //     {path:'employees', component:EmployeesListComponent},
+  //     { path: 'employees/add', component: EmployeesListComponent },
+  //     { path: 'employees/view/:id', component: EmployeesListComponent },
+  //   ]
+  // },
+  { path: '', component: HomeComponent, canActivate:[AuthorizationGuard] },
+  { path: 'employees', component:EmployeesListComponent, canActivate:[AuthorizationGuard]},
+  { path: 'employees/add', component: EmployeesListComponent, canActivate:[AuthorizationGuard] },
+  { path: 'employees/view/:id', component: EmployeesListComponent, canActivate:[AuthorizationGuard] },
   {
     path: 'account',
     loadChildren: () =>
