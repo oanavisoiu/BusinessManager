@@ -12,6 +12,7 @@ import { HomeComponent } from './components/homepage/home/home.component';
 import { AccountModule } from './components/account/account.module';
 import { SharedModule } from './shared/shared.module';
 import { ConfirmEmailComponent } from './components/account/confirm-email/confirm-email.component';
+import { CompanyModule } from './components/company/company.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ConfirmEmailComponent } from './components/account/confirm-email/confir
     FormsModule,
     NgbModule,
     AccountModule,
-    SharedModule
+    SharedModule,
+    CompanyModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

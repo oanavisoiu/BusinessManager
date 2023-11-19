@@ -3,7 +3,7 @@
   <button class="btn logged-user" type="button" data-bs-toggle="dropdown">
     <div class="button-content">
       <div class="profile-name">{{user.firstName}} {{user.lastName}}</div>
-      <div class="business-name">businessNamedfws gvergerghergegre</div>
+      <div class="business-name" *ngIf="(companyService.company$ | async) as company">{{company.name}}</div>
     </div>
 
   </button>

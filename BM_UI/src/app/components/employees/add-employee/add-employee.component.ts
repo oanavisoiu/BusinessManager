@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { Employee } from 'src/app/shared/models/employee.model';
 import { EmployeesService } from 'src/app/services/employees/employees.service';
 
@@ -26,6 +26,7 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   addEmployee(){
+
     this.employeeService.addEmployee(this.employee).subscribe({
       next:(tmpEmployee)=>{
         console.log(tmpEmployee);

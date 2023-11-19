@@ -1,7 +1,7 @@
 import { EmployeesService } from './../../../services/employees/employees.service';
 import { Component, OnInit } from '@angular/core';
 import { Employee } from 'src/app/shared/models/employee.model';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 import { ViewEmployeeComponent } from '../view-employee/view-employee.component';
 
@@ -17,18 +17,25 @@ export class EmployeesListComponent implements OnInit {
     this.reloadData();
   }
 
-
   ngOnInit(): void {
     this.reloadData();
   }
 
   openEditModal(employee:Employee){
-    const modalRef = this.modalService.open(ViewEmployeeComponent);
+    const modalOptions:NgbModalOptions={
+      backdrop:'static',
+      keyboard:false
+    }
+    const modalRef = this.modalService.open(ViewEmployeeComponent,modalOptions);
     modalRef.componentInstance.employee = { ...employee };
   }
 
   openAddEmployeeModal(){
-    const modalRef = this.modalService.open(AddEmployeeComponent);
+    const modalOptions:NgbModalOptions={
+      backdrop:'static',
+      keyboard:false
+    };
+    const modalRef = this.modalService.open(AddEmployeeComponent,modalOptions);
   }
 
   reloadData(){

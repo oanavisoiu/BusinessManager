@@ -1,5 +1,7 @@
 using BM_API.Data;
 using BM_API.Models;
+using BM_API.Repositories;
+using BM_API.Repositories.RepositoryInterfaces;
 using BM_API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -68,6 +70,10 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
         return new BadRequestObjectResult(toReturn);
     };
 });
+
+builder.Services.AddTransient<IRepository, Repository>();
+builder.Services.AddTransient<IAccountRepository, AccountRepository>();
+builder.Services.AddTransient<ICompanyRepository, CompanyRepository>();
 
 var app = builder.Build();
 

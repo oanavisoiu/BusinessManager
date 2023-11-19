@@ -1,1 +1,9 @@
-<p>home works!</p>
+<div *ngIf="(accountService.user$|async) as user">
+  <div *ngIf="!(companyService.company$|async) as company">
+    <button class="btn btn-primary" [routerLink]="['/add-company']" (click)="addCompanyClick()">Add your
+      company</button>
+  </div>
+  <div *ngIf="(companyService.company$|async) as company">
+    <div>Home works</div>
+  </div>
+</div>
