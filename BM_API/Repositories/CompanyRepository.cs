@@ -18,9 +18,14 @@ namespace BM_API.Repositories
             return await _bmDbContext.Companies.ToListAsync();
         }
 
-        public async Task<Company> GetCompanyByUserIdAsync(string userId)
+        public async Task<Company> GetCompanyAsync(User user)
         {
-            return await _bmDbContext.Companies.FirstAsync(x=>x.UserId.Equals(userId));
+            Company? company = await _bmDbContext.Companies.FirstOrDefaultAsync(x => x.User.Equals(user));
+            return company;
+        }
+        public async Task<Company> GetCompanyByIdAsync(Guid id)
+        {
+            return await _bmDbContext.Companies.FirstOrDefaultAsync(x=>x.Id==id);
         }
     }
 }

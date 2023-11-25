@@ -9,7 +9,8 @@ namespace BM_API.Models
         public string UserId { get; set; }
         [Required]
         public string Name { get; set; }
-        public string Address { get; set; }
-        public string PhoneNumber { get; set; }
+        public string? Address { get; set; }
+        public string? PhoneNumber { get; set; }
+        public virtual User? User { get; set; }
     }
 }

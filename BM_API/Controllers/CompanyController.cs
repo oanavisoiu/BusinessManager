@@ -9,7 +9,7 @@ namespace BM_API.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class CompanyController : Controller
+    public class CompanyController : ControllerBase
     {
         private readonly ICompanyRepository _companyRepository;
         private readonly IAccountRepository _accountRepository;
@@ -19,35 +19,30 @@ namespace BM_API.Controllers
             _accountRepository = accountRepository;
         }
         [HttpPost("create-company")]
-        public async Task<ActionResult> CreateCompany([FromBody] Company companyAdd)
+        public async Task<ActionResult> CreateCompany([FromBody] Company company)
         {
             try
             {
+                company.Id = Guid.NewGuid();
                 User user = await _accountRepository.GetUserByEmailAsync(User.FindFirst(ClaimTypes.Email)?.Value);
                 if (user == null)
                 {
-                    return NotFound("No user logged.");
+                    return NotFound("No user found.");
                 }
-                Company company = new Company
-                {
-                    Name = companyAdd.Name,
-                    Address = companyAdd.Address,
-                    PhoneNumber = companyAdd.PhoneNumber,
-                    Id = Guid.NewGuid(),
-                    UserId = user.Id
-                };
+                company.User= user;
                 _companyRepository.Add(company);
-                await _companyRepository.SaveChangesAsync();
-                return Ok(company);
+                if(await _companyRepository.SaveChangesAsync())
+                    return Ok(company);
+                return BadRequest("Db failure.");
             }
             catch (Exception)
             {
-                return BadRequest("Failure?");
+                return BadRequest("Db failure.");
             }
         }
 
         [HttpGet("get-company")]
-        public async Task<ActionResult<Company>> GetCompany()
+        public async Task<IActionResult> GetCompany()
         {
             try
             {
@@ -56,16 +51,16 @@ namespace BM_API.Controllers
                 {
                     return BadRequest("User is not logged.");
                 }
-                Company company = await _companyRepository.GetCompanyByUserIdAsync(loggedUser.Id);
+                Company company = await _companyRepository.GetCompanyAsync(loggedUser);
                 if (company == null)
                 {
                     return NotFound("No company found.");
                 }
                 return Ok(company);
             }
-            catch(Exception e)
+            catch(Exception)
             {
-                return BadRequest("Failed.");
+                return BadRequest("Db fail.");
             }
         }
         
