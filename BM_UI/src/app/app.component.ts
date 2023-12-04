@@ -15,17 +15,11 @@ export class AppComponent implements OnInit {
   }
 
   refreshUser(){
-    const jwt = this.accountService.getJWT();
-    if(jwt){
-      this.accountService.refreshUser(jwt)?.subscribe({
+      this.accountService.refreshUser()?.subscribe({
         next: _=>{},
         error: _=>{
           this.accountService.logout();
         }
       });
     }
-    else{
-      this.accountService.refreshUser(null)?.subscribe();
-    }
   }
-}

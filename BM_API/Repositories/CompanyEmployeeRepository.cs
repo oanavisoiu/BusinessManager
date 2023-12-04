@@ -21,6 +21,7 @@ namespace BM_API.Repositories
         public async Task<ICollection<CompanyEmployee>> GetEmployeesByCompanyAsync(Guid companyId)
         {
             var employees = await _bmDbContext.CompanyEmployees.Where(x => x.CompanyId.Equals(companyId)).ToListAsync();
+
             return  employees;
         }
     }

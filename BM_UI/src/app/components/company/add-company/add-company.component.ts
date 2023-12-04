@@ -26,8 +26,7 @@ export class AddCompanyComponent implements OnInit {
   }
 
   addCompany(){
-    const jwt=this.accountService.getJWT();
-    this.companyService.addCompany(this.company,jwt)?.subscribe({
+    this.companyService.addCompany(this.company)?.subscribe({
       next:(tmpCompany)=>{
         this.modalService.dismissAll();
         this.router.navigate(['']);

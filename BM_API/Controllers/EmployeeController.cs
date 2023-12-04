@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BM_API.Data;
+using BM_API.DTOs.Employee;
 using BM_API.Migrations;
 using BM_API.Models;
 using BM_API.Repositories.RepositoryInterfaces;
@@ -50,15 +51,15 @@ namespace BM_API.Controllers
         }
 
         [HttpPost("add-employee")]
-        public async Task<IActionResult> AddEmployee([FromBody] Employee employeeRequest)
+        public async Task<IActionResult> AddEmployee([FromBody] EmployeeUpdateDTO employeeRequest)
         {
             try
             {
-                employeeRequest.Id = Guid.NewGuid();
-
-                _employeeRepository.Add(employeeRequest);
+                Employee employee = _mapper.Map<Employee>(employeeRequest);
+                employee.Id = Guid.NewGuid();
+                _employeeRepository.Add(employee);
                 if (await _employeeRepository.SaveChangesAsync())
-                    return Ok(employeeRequest);
+                    return Ok(employee);
                 return BadRequest("Db failure");
             }
             catch (Exception)
@@ -68,15 +69,17 @@ namespace BM_API.Controllers
         }
 
         [HttpPut("update-employee/{id}")]
-        public async Task<IActionResult> UpdateEmployee([FromRoute] Guid id, Employee updatedEmployee)
+        public async Task<IActionResult> UpdateEmployee([FromRoute] Guid id,[FromBody] EmployeeUpdateDTO updatedEmployee)
         {
             try
             {
                 if(id == Guid.Empty)
                 { return BadRequest("Id is empty."); }
-                _employeeRepository.Update(updatedEmployee);
+                Employee employee = _mapper.Map<Employee>(updatedEmployee);
+                employee.Id=id;
+                _employeeRepository.Update(employee);
                 if(await _employeeRepository.SaveChangesAsync())
-                    return Ok(updatedEmployee);
+                    return Ok(employee);
                 return BadRequest("Db failure");
             }
             catch(Exception)

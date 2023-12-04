@@ -1,4 +1,6 @@
+using AutoMapper;
 using BM_API.Data;
+using BM_API.DTOs.Employee;
 using BM_API.Models;
 using BM_API.Repositories;
 using BM_API.Repositories.RepositoryInterfaces;
@@ -71,13 +73,13 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
     };
 });
 
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
 builder.Services.AddTransient<IRepository, Repository>();
 builder.Services.AddTransient<IAccountRepository, AccountRepository>();
 builder.Services.AddTransient<ICompanyRepository, CompanyRepository>();
 builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddTransient<ICompanyEmployeeRepository, CompanyEmployeeRepository>();
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
@@ -88,6 +90,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.UseHttpsRedirection();
 

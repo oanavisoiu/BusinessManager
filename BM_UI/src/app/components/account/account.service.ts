@@ -24,23 +24,14 @@ export class AccountService {
     private companyService: CompanyService
   ) {}
 
-  refreshUser(jwt: string | null) {
-    if (jwt == null) {
-      this.userSource.next(null);
-      return undefined;
-    }
-    let headers = new HttpHeaders();
-    headers = headers.set('Authorization', 'Bearer ' + jwt);
-
+  refreshUser() {
     return this.http
-      .get<User>(this.baseApiUrl + '/api/Account/refresh-user-token', {
-        headers,
-      })
+      .get<User>(this.baseApiUrl + '/api/Account/refresh-user-token')
       .pipe(
         map((user: User) => {
           if (user) {
             this.setUser(user);
-            this.companyService.getCompany(user.jwt).subscribe(
+            this.companyService.getCompany().subscribe(
               (company) => {},
               (error) => {
                 console.error(error);
@@ -64,7 +55,7 @@ export class AccountService {
         map((user: User) => {
           if (user) {
             this.setUser(user);
-            this.companyService.getCompany(user.jwt).subscribe(
+            this.companyService.getCompany().subscribe(
               (company) => {},
               (error) => {
                 console.error('Error retrieving company data:', error);
@@ -77,6 +68,7 @@ export class AccountService {
 
   logout() {
     localStorage.removeItem(environment.userKey);
+    sessionStorage.removeItem(environment.userKey);
     this.userSource.next(null);
     this.companyService.resetCompany();
     this.router.navigateByUrl('/account');

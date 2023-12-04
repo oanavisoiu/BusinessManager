@@ -9,6 +9,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationComponent } from './components/modals/notification/notification.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoggedUserComponent } from './components/logged-user/logged-user.component';
+import { DevextremeModule } from './materials/devextreme/devextreme.module';
 
 
 
@@ -26,6 +27,7 @@ import { LoggedUserComponent } from './components/logged-user/logged-user.compon
     RouterModule,
     HttpClientModule,
     NgbModalModule,
+    DevextremeModule
   ],
   exports: [
     ReactiveFormsModule,

@@ -2,10 +2,12 @@
 using BM_API.Models;
 using BM_API.Repositories;
 using BM_API.Repositories.RepositoryInterfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BM_API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class CompanyEmployeeController:ControllerBase
@@ -23,23 +25,33 @@ namespace BM_API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("get-employees-by-company")]
+        [HttpGet("get-employees-by-company/{companyId}")]
         public async Task<IActionResult> GetEmployeesByCompany(Guid companyId)
         {
             try
             {
-                ICollection<CompanyEmployee> employees = await _companyEmployeeRepository.GetEmployeesByCompanyAsync(companyId);
-                if(employees==null)
+                if (companyId.Equals(Guid.Empty))
+                {
+                    return BadRequest("Company doesn't exist.");
+                }
+
+                ICollection<CompanyEmployee> companyEmployees = await _companyEmployeeRepository.GetEmployeesByCompanyAsync(companyId);
+                List<Employee> employees = new List<Employee>();
+
+                foreach (CompanyEmployee ce in companyEmployees)
+                {
+                    ce.Employee = await _employeeRepository.GetEmployeeByIdAsync(ce.EmployeeId);
+                    employees.Add(ce.Employee);
+                }
+
+                if (employees == null || employees.Count == 0)
                 {
                     return NotFound("Employees not found");
                 }
-                if (employees.Count > 0)
-                {
-                    return Ok(_mapper.Map<Employee>(employees));
-                }
-                return BadRequest("Db failure");
+
+                return Ok(employees);
             }
-            catch (Exception) 
+            catch (Exception)
             {
                 return BadRequest();
             }

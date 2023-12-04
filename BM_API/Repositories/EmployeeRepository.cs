@@ -1,4 +1,5 @@
 ﻿using BM_API.Data;
+using BM_API.DTOs.Employee;
 using BM_API.Models;
 using BM_API.Repositories.RepositoryInterfaces;
 using Microsoft.EntityFrameworkCore;
@@ -15,8 +16,9 @@ namespace BM_API.Repositories
         }
         public async Task<Employee> GetEmployeeByIdAsync(Guid id)
         {
-           Employee? employee = await _bmDbContext.Employees.FirstAsync(x => x.Id == id);
+           Employee? employee = await _bmDbContext.Employees.FirstAsync(x => x.Id.Equals(id));
             return employee;
         }
+        
     }
 }

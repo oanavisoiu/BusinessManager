@@ -15,15 +15,10 @@ export class CompanyService {
 
   constructor(private http: HttpClient) {}
 
-  addCompany(company: Company, jwt: string | null) {
+  addCompany(company: Company) {
     company.id = '00000000-0000-0000-0000-000000000000';
-    let headers = new HttpHeaders();
-    headers = headers.set('Authorization', 'Bearer ' + jwt);
-
     return this.http
-      .post<Company>(this.baseApiUrl + '/api/company/create-company', company, {
-        headers,
-      }).pipe(
+      .post<Company>(this.baseApiUrl + '/api/company/create-company', company).pipe(
         map((company: Company) => {
           if (company) {
             this.setCompany(company);
@@ -32,12 +27,9 @@ export class CompanyService {
       );
   }
 
-  getCompany(jwt: string | null) {
-    let headers = new HttpHeaders();
-    headers = headers.set('Authorization', 'Bearer ' + jwt);
-
+  getCompany() {
     return this.http
-      .get<Company>(this.baseApiUrl + '/api/company/get-company', { headers })
+      .get<Company>(this.baseApiUrl + '/api/company/get-company')
       .pipe(
         map((company: Company) => {
           if (company) {

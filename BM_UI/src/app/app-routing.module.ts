@@ -5,9 +5,14 @@ import { NotFoundComponent } from './shared/components/errors/not-found/not-foun
 import { AuthorizationGuard } from './shared/guards/authorization.guard';
 
 const routes: Routes = [
-  { path: 'employees', component:EmployeesListComponent, canActivate:[AuthorizationGuard]},
-  { path: 'employees/add', component: EmployeesListComponent, canActivate:[AuthorizationGuard] },
-  { path: 'employees/view/:id', component: EmployeesListComponent, canActivate:[AuthorizationGuard] },
+  {
+    path: 'employees',
+    loadChildren: () =>
+      import('./components/employees/employees.module').then(
+        (module) => module.EmployeesModule
+      ),
+    canActivate:[AuthorizationGuard]
+  },
   {
     path: '',
     loadChildren: () =>
