@@ -1,16 +1,19 @@
 <div class="dropdown" *ngIf="(accountService.user$ | async) as user">
-
-  <button class="btn logged-user" type="button" data-bs-toggle="dropdown">
-    <div class="button-content">
-      <div class="profile-name">{{user.firstName}} {{user.lastName}}</div>
-      <div class="business-name" *ngIf="(companyService.company$ | async) as company">{{company.name}}</div>
+  <div class="button-container">
+    <button class="btn logged-user" type="button" data-bs-toggle="dropdown">
+      <div class="name-container">
+        <div class="user-info">
+          <div class="profile-name">{{user.firstName}} {{user.lastName}}</div>
+          <div class="business-name" *ngIf="(companyService.company$ | async) as company">{{company.name}}</div>
+        </div>
+        <i class="bi bi-person-fill"></i>
+      </div>
+    </button>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <a class="dropdown-item" href="#">Profile</a>
+      <a class="dropdown-item" href="#">Settings</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" (click)="logout()">Logout</a>
     </div>
-
-  </button>
-  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <a class="dropdown-item" href="#">Profile</a>
-    <a class="dropdown-item" href="#">Settings</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" (click)="logout()">Logout</a>
   </div>
 </div>
