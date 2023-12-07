@@ -6,24 +6,28 @@
 
 <div *ngIf="(accountService.user$ | async) as user">
   <dx-drawer [openedStateMode]="selectedOpenMode" [position]="selectedPosition" [revealMode]="selectedRevealMode"
-    template="template" [(opened)]="isDrawerOpen" height="auto" [closeOnOutsideClick]="true"
+    template="template" [(opened)]="isDrawerOpen" [closeOnOutsideClick]="true"
     style="background-color: rgb(249, 244, 246);">
-    <div *dxTemplate="let data of 'template'" style="width: 200px; height:100vh; background-color: rgb(235, 213, 223);">
+    <div class="dx-drawer-content">
+      <div *dxTemplate="let data of 'template'"
+        style="width: 200px; height:100vh; background-color: rgb(235, 213, 223);">
 
-      <div style="display: flex; flex-direction: column;">
-        <button class="btn mt-3 menu-item" [routerLink]="['/']">
-          <div>Home</div>
-        </button>
+        <div style="display: flex; flex-direction: column;">
+          <button class="btn mt-3 menu-item" [routerLink]="['/']">
+            <div>Home</div>
+          </button>
 
-        <!-- <dx-button [text]="'Home'"stylingMode="text" type="normal" ></dx-button> -->
-        <button class="btn mt-3 menu-item" [routerLink]="['/employees']">
-          <div>Employees</div>
-        </button>
-        <!-- <dx-button [text]="'Employees'" (onClick)="changeRoute('employees')"></dx-button>
+          <!-- <dx-button [text]="'Home'"stylingMode="text" type="normal" ></dx-button> -->
+          <button class="btn mt-3 menu-item" [routerLink]="['/employees']">
+            <div>Employees</div>
+          </button>
+          <!-- <dx-button [text]="'Employees'" (onClick)="changeRoute('employees')"></dx-button>
           <dx-button [text]="'Profile'" (onClick)="changeRoute('Profile')"></dx-button> -->
+        </div>
       </div>
+      <router-outlet></router-outlet>
     </div>
-    <router-outlet></router-outlet>
+
   </dx-drawer>
 </div>
 <div *ngIf="!(accountService.user$ | async) as user">
