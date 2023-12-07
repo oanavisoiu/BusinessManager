@@ -18,6 +18,8 @@ export class EmployeesListComponent implements OnInit {
 
   employees: any;
   errors="";
+  maxDate: Date = new Date();
+  minDate:Date = new Date();
   companyEmployee: CompanyEmployee = {
                 id: '',
                 companyId: '',
@@ -25,7 +27,7 @@ export class EmployeesListComponent implements OnInit {
               };
 
   constructor(private employeesService: EmployeesService, private companyService:CompanyService) {
-
+    this.maxDate = new Date(this.maxDate.setFullYear(this.maxDate.getFullYear() - 15));
   }
 
   ngOnInit(): void {

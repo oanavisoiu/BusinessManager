@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using BM_API.Data;
-using BM_API.DTOs.Employee;
+using BM_API.DTOs.EmployeeUpdateDto;
 using BM_API.Migrations;
 using BM_API.Models;
 using BM_API.Repositories.RepositoryInterfaces;
