@@ -13,5 +13,8 @@ namespace BM_API.Data
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<CompanyEmployee> CompanyEmployees { get; set;}
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<CompanySupplier> CompanySuppliers { get; set;}
+        public DbSet<Product> Products { get; set; }
     }
 }

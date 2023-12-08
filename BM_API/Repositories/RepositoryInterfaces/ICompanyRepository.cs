@@ -1,4 +1,5 @@
-﻿using BM_API.Models;
+﻿using BM_API.Data;
+using BM_API.Models;
 
 namespace BM_API.Repositories.RepositoryInterfaces
 {

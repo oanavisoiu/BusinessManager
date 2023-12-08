@@ -32,7 +32,7 @@ namespace BM_API.Controllers
             {
                 if (companyId.Equals(Guid.Empty))
                 {
-                    return BadRequest("Company doesn't exist.");
+                    return BadRequest("Company id is null.");
                 }
 
                 ICollection<CompanyEmployee> companyEmployees = await _companyEmployeeRepository.GetEmployeesByCompanyAsync(companyId);

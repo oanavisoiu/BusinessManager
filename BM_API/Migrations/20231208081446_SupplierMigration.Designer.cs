@@ -4,6 +4,7 @@ using BM_API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BM_API.Migrations
 {
     [DbContext(typeof(BMDbContext))]
-    partial class BMDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231208081446_SupplierMigration")]
+    partial class SupplierMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,27 +71,6 @@ namespace BM_API.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("CompanyEmployees");
-                });
-
-            modelBuilder.Entity("BM_API.Models.CompanySupplier", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CompanyId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("SupplierId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
-
-                    b.HasIndex("SupplierId");
-
-                    b.ToTable("CompanySuppliers");
                 });
 
             modelBuilder.Entity("BM_API.Models.Employee", b =>
@@ -180,6 +162,9 @@ namespace BM_API.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -194,6 +179,8 @@ namespace BM_API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
 
                     b.ToTable("Suppliers");
                 });
@@ -437,25 +424,6 @@ namespace BM_API.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("BM_API.Models.CompanySupplier", b =>
-                {
-                    b.HasOne("BM_API.Models.Company", "Company")
-                        .WithMany()
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BM_API.Models.Supplier", "Supplier")
-                        .WithMany()
-                        .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
-
-                    b.Navigation("Supplier");
-                });
-
             modelBuilder.Entity("BM_API.Models.Product", b =>
                 {
                     b.HasOne("BM_API.Models.Supplier", "Supplier")
@@ -465,6 +433,17 @@ namespace BM_API.Migrations
                         .IsRequired();
 
                     b.Navigation("Supplier");
+                });
+
+            modelBuilder.Entity("BM_API.Models.Supplier", b =>
+                {
+                    b.HasOne("BM_API.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
