@@ -65,7 +65,7 @@ namespace BM_API.Controllers
                 return BadRequest("Db failure");
             }
         }
-        [HttpPut("updatesupplier/{supplierId}")]
+        [HttpPut("update-supplier/{supplierId}")]
         public async Task<IActionResult> UpdateSupplier([FromRoute] Guid supplierId, [FromBody] SupplierDTO supplier)
         {
             try
