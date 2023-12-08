@@ -28,6 +28,14 @@ const routes: Routes = [
         (module) => module.AccountModule
       ),
   },
+  {
+    path: 'suppliers',
+    loadChildren: () =>
+      import('./components/supplier/supplier.module').then(
+        (module) => module.SupplierModule
+      ),
+    canActivate:[AuthorizationGuard]
+  },
   { path: '**', component: NotFoundComponent, pathMatch:'full' },
 ];
 

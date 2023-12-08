@@ -20,9 +20,9 @@ namespace BM_API.Repositories
         {
             return await _dbContext.CompanySuppliers.Where(x => x.CompanyId.Equals(companyId)).ToListAsync();
         }
-        public async Task<CompanySupplier> GetCompalySupplierBySupplierIdAsync(Guid supplierId)
+        public async Task<CompanySupplier> GetCompanySupplierBySupplierIdAsync(Guid supplierId)
         {
-            return await _dbContext.CompanySuppliers.FirstAsync(x => x.SupplierId.Equals(supplierId));
+            return await _dbContext.CompanySuppliers.FirstOrDefaultAsync(x => x.SupplierId.Equals(supplierId));
         }
     }
 }

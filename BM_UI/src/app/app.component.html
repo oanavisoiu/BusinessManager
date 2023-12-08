@@ -16,13 +16,12 @@
           <button class="btn mt-3 menu-item" [routerLink]="['/']">
             <div>Home</div>
           </button>
-
-          <!-- <dx-button [text]="'Home'"stylingMode="text" type="normal" ></dx-button> -->
           <button class="btn mt-3 menu-item" [routerLink]="['/employees']">
             <div>Employees</div>
           </button>
-          <!-- <dx-button [text]="'Employees'" (onClick)="changeRoute('employees')"></dx-button>
-          <dx-button [text]="'Profile'" (onClick)="changeRoute('Profile')"></dx-button> -->
+          <button class="btn mt-3 menu-item" [routerLink]="['/suppliers']">
+            <div>Suppliers</div>
+          </button>
         </div>
       </div>
       <router-outlet></router-outlet>

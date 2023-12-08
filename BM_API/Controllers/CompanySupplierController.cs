@@ -54,10 +54,14 @@ namespace BM_API.Controllers
         }
 
         [HttpPost("add-company-supplier")]
-        public async Task<IActionResult> AddCompanySupplier(CompanySupplierDTO companySupplier)
+        public async Task<IActionResult> AddCompanySupplier(CompanySupplier companySupplier)
         {
             try
             {
+                if (companySupplier == null)
+                {
+                    return BadRequest("Company employee is null.");
+                }
                 Company company  = await _companyRepository.GetCompanyByIdAsync(companySupplier.CompanyId);
                 if (company == null)
                 {
@@ -68,23 +72,17 @@ namespace BM_API.Controllers
                 {
                     return NotFound("Supplier not found.");
                 }
-                CompanySupplier foundSupplier = await _companySupplierRepository.GetCompalySupplierBySupplierIdAsync(companySupplier.SupplierId);
-                if(foundSupplier != null)
+                var foundCompanySupplier = await _companySupplierRepository.GetCompanySupplierBySupplierIdAsync(companySupplier.SupplierId);
+                if (foundCompanySupplier != null)
                 {
-                    return BadRequest("Supplier already in a company");
+                    return BadRequest("Employee already exists in this company.");
                 }
-                CompanySupplier companySupplierAdd = new CompanySupplier
-                {
-                    Id = Guid.NewGuid(),
-                    CompanyId = companySupplier.CompanyId,
-                    SupplierId = companySupplier.SupplierId,
-                    Company = company,
-                    Supplier = supplier,
-                };
-                _companySupplierRepository.Add(companySupplierAdd);
+                companySupplier.Supplier = supplier;
+                companySupplier.Company = company;
+                _companySupplierRepository.Add(companySupplier);
                 if(await _companySupplierRepository.SaveChangesAsync())
                 {
-                    return Ok(companySupplierAdd);
+                    return Ok(companySupplier);
                 }
                 return BadRequest("Db failure.");
 
@@ -103,7 +101,7 @@ namespace BM_API.Controllers
                 {
                     return BadRequest("Supplier id is null.");
                 }
-                CompanySupplier foundSupplier = await _companySupplierRepository.GetCompalySupplierBySupplierIdAsync(supplierId);
+                CompanySupplier foundSupplier = await _companySupplierRepository.GetCompanySupplierBySupplierIdAsync(supplierId);
                 if (foundSupplier == null)
                 {
                     return NotFound("Supplier not found.");
