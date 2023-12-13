@@ -5,7 +5,7 @@ import { CompanyService } from '../../company/company.service';
 import { Router } from '@angular/router';
 import { Employee } from 'src/app/shared/models/employee/employee.model';
 import CustomStore from 'devextreme/data/custom_store';
-import { from } from 'rxjs';
+import { catchError, from, of } from 'rxjs';
 import { EmployeeUpdate } from 'src/app/shared/models/employee/employee-update.model';
 import { CompanyEmployee } from 'src/app/shared/models/employee/company-employee.model';
 
@@ -31,6 +31,7 @@ export class EmployeesListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.operations();
   }
 
@@ -42,8 +43,13 @@ export class EmployeesListComponent implements OnInit {
           this.employees = new CustomStore({
             key: 'id',
             load: () => {
-              const observableData = dataService.getAllEmployees(company.id);
-              return from(observableData).toPromise();
+              return dataService.getAllEmployees(company.id).pipe(
+                catchError((error) => {
+                  console.error('Error loading employees:', error);
+                  return of([]);
+                })
+              ).toPromise();
+
             },
             update: (key, values) => {
               const employeeId = key;
@@ -68,7 +74,7 @@ export class EmployeesListComponent implements OnInit {
                 });
               });
             },
-            insert: (values) => {
+            insert: (values:any) => {
               return new Promise<Employee>((resolve, reject) => {
                 const newEmployee: Employee = { ...values };
 

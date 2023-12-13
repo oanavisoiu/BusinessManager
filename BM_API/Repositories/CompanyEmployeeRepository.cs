@@ -5,13 +5,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BM_API.Repositories
 {
-    public class CompanyEmployeeRepository:Repository,ICompanyEmployeeRepository
+    public class CompanyEmployeeRepository : Repository, ICompanyEmployeeRepository
     {
         private readonly BMDbContext _bmDbContext;
+        private readonly IEmployeeRepository _employeeRepository;
 
-        public CompanyEmployeeRepository(BMDbContext bmDbContext):base(bmDbContext)
+        public CompanyEmployeeRepository(BMDbContext bmDbContext, IEmployeeRepository employeeRepository) : base(bmDbContext)
         {
             _bmDbContext = bmDbContext;
+            _employeeRepository = employeeRepository;
         }
         public async Task<CompanyEmployee> GetCompanyEmployeeByEmployeeId(Guid employeeId)
         {
@@ -22,7 +24,21 @@ namespace BM_API.Repositories
         {
             var employees = await _bmDbContext.CompanyEmployees.Where(x => x.CompanyId.Equals(companyId)).ToListAsync();
 
-            return  employees;
+            return employees;
         }
+        public async Task<long> GetSumOfSalariesAsync(Guid companyId)
+        {
+            long sum = 0;
+            var companyEmployees = await GetEmployeesByCompanyAsync(companyId);
+
+            foreach (var companyEmployee in companyEmployees)
+            {
+                var employee = await _employeeRepository.GetEmployeeByIdAsync(companyEmployee.EmployeeId);
+                sum += employee.Salary;
+            }
+
+            return sum;
+        }
+        
     }
 }

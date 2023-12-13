@@ -36,6 +36,14 @@ const routes: Routes = [
       ),
     canActivate:[AuthorizationGuard]
   },
+  {
+    path: 'budget',
+    loadChildren: () =>
+      import('./components/budget/budget.module').then(
+        (module) => module.BudgetModule
+      ),
+    canActivate:[AuthorizationGuard]
+  },
   { path: '**', component: NotFoundComponent, pathMatch:'full' },
 ];
 

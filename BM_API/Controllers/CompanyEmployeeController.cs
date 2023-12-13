@@ -4,6 +4,7 @@ using BM_API.Repositories;
 using BM_API.Repositories.RepositoryInterfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.Design;
 
 namespace BM_API.Controllers
 {
@@ -123,6 +124,24 @@ namespace BM_API.Controllers
             catch(Exception)
             {
                 return BadRequest("Db fail.");
+            }
+        }
+        [HttpGet("get-sum-of-salaries/{companyId}")]
+        public async Task<IActionResult> GetSumOfSalaries(Guid companyId)
+        {
+            try
+            {
+                if(companyId.Equals(Guid.Empty))
+                {
+                    return BadRequest("Company id is null.");
+                }
+                var sum = await _companyEmployeeRepository.GetSumOfSalariesAsync(companyId);
+                return Ok(sum);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
     }

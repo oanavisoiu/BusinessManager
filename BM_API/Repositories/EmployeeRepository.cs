@@ -16,7 +16,7 @@ namespace BM_API.Repositories
         }
         public async Task<Employee> GetEmployeeByIdAsync(Guid id)
         {
-           Employee? employee = await _bmDbContext.Employees.FirstAsync(x => x.Id.Equals(id));
+            Employee? employee = await _bmDbContext.Employees.FirstAsync(x => x.Id.Equals(id));
             return employee;
         }
         

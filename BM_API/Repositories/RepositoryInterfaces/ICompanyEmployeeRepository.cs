@@ -6,5 +6,6 @@ namespace BM_API.Repositories.RepositoryInterfaces
     {
         Task<CompanyEmployee> GetCompanyEmployeeByEmployeeId(Guid id);
         Task<ICollection<CompanyEmployee>> GetEmployeesByCompanyAsync(Guid companyId);
+        Task<long> GetSumOfSalariesAsync(Guid companyId);
     }
 }

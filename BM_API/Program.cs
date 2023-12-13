@@ -80,6 +80,8 @@ builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddTransient<ICompanyEmployeeRepository, CompanyEmployeeRepository>();
 builder.Services.AddTransient<ISupplierRepository, SupplierRepository>();
 builder.Services.AddTransient<ICompanySupplierRepository, CompanySupplierRepository>();
+builder.Services.AddTransient<IBudgetRepository, BudgetRepository>();
+builder.Services.AddTransient<IPaymentTypeRepository, PaymentTypeRepository>();
 //builder.Services.AddTransient<IProductRepository, ProductRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

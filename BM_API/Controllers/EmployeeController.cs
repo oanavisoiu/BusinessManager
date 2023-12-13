@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using BM_API.Data;
 using BM_API.DTOs.EmployeeUpdateDto;
-using BM_API.Migrations;
 using BM_API.Models;
 using BM_API.Repositories.RepositoryInterfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -69,7 +67,7 @@ namespace BM_API.Controllers
         }
 
         [HttpPut("update-employee/{id}")]
-        public async Task<IActionResult> UpdateEmployee([FromRoute] Guid id,[FromBody] EmployeeUpdateDTO updatedEmployee)
+        public async Task<IActionResult> UpdateEmployee([FromRoute] Guid id,[FromBody] DTOs.EmployeeUpdateDto.EmployeeUpdateDTO updatedEmployee)
         {
             try
             {
@@ -109,6 +107,7 @@ namespace BM_API.Controllers
                 return BadRequest("Db failure");
             }
         }
+        
     }
 
 }

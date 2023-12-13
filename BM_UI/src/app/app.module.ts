@@ -14,6 +14,7 @@ import { EmployeesModule } from './components/employees/employees.module';
 import { JwtInterceptor } from './shared/jwt.interceptor';
 import { DevextremeModule } from './shared/materials/devextreme/devextreme.module';
 import { SupplierModule } from './components/supplier/supplier.module';
+import { BudgetModule } from './components/budget/budget.module';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { SupplierModule } from './components/supplier/supplier.module';
     CompanyModule,
     EmployeesModule,
     DevextremeModule,
-    SupplierModule
+    SupplierModule,
+    BudgetModule
   ],
   providers: [
     {

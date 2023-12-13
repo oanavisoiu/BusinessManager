@@ -3,7 +3,7 @@ import { CompanyService } from 'src/app/components/company/company.service';
 import { CompanySupplier } from 'src/app/shared/models/supplier/company-supplier.model';
 import { SupplierService } from '../../supplier.service';
 import CustomStore from 'devextreme/data/custom_store';
-import { from } from 'rxjs';
+import { catchError, from, of } from 'rxjs';
 import { Supplier } from 'src/app/shared/models/supplier/supplier.model';
 import { SupplierUpdate } from 'src/app/shared/models/supplier/supplier-update.model';
 
@@ -35,9 +35,13 @@ export class SupplierListComponent implements OnInit {
           this.suppliers = new CustomStore({
             key: 'id',
             load: () => {
-              const observableData = dataService.getAllSuppliers(company.id);
-              return from(observableData).toPromise();
-             },
+              return dataService.getAllSuppliers(company.id).pipe(
+                catchError((error) => {
+                  console.error('Error loading suppliers:', error);
+                  return of([]);
+                })
+              ).toPromise();
+            },
             update: (key, values) => {
               const supplierId = key;
               return new Promise((resolve, reject) => {
@@ -61,20 +65,17 @@ export class SupplierListComponent implements OnInit {
                 });
               });
             },
-            insert: (values) => {
+            insert: (values:any) => {
               return new Promise<Supplier>((resolve, reject) => {
                 const newEmployee: Supplier = { ...values };
 
                 dataService.addSupplier(newEmployee).subscribe({
                   next: (sup: Supplier) => {
-
                     this.companySupplier.supplierId = sup.id;
                     this.companySupplier.companyId = company.id;
-                    console.log(sup.id);
-                    console.log(company.id);
+
                     dataService.addCompanySupplier(this.companySupplier).subscribe({
                       next: (company) => {
-
                         resolve(sup);
                       },
                       error: (companyError) => {

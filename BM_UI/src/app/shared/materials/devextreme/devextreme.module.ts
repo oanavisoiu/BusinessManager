@@ -1,10 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DxButtonModule, DxDateBoxModule, DxDrawerModule, DxFormModule, DxListModule, DxMenuModule, DxTabsModule, DxTextBoxModule, DxToolbarModule, DxTreeListModule, DxTreeViewModule } from 'devextreme-angular';
-import { DxiFieldModule, DxiItemModule, DxoLabelModule } from 'devextreme-angular/ui/nested';
-
-
-
+import { DxButtonModule, DxDataGridModule, DxDateBoxModule, DxDrawerModule, DxFormModule, DxListModule, DxMenuModule, DxSelectBoxModule, DxTabsModule, DxTextBoxModule, DxToolbarModule, DxTreeListModule, DxTreeViewModule } from 'devextreme-angular';
+import { DxiFieldModule, DxiGroupItemModule, DxiItemModule, DxiTotalItemModule, DxoEditingModule, DxoItemModule, DxoLabelModule, DxoSummaryModule } from 'devextreme-angular/ui/nested';
 
 @NgModule({
   declarations: [],
@@ -23,7 +20,16 @@ import { DxiFieldModule, DxiItemModule, DxoLabelModule } from 'devextreme-angula
     DxDrawerModule,
     DxListModule,
     DxMenuModule,
-    DxTreeViewModule
+    DxTreeViewModule,
+    DxSelectBoxModule,
+    DxoEditingModule,
+    DxoItemModule,
+    DxoSummaryModule,
+    DxoSummaryModule,
+    DxiTotalItemModule,
+    DxiGroupItemModule,
+    DxDataGridModule,
+    DxoEditingModule
   ],
   exports: [
     DxButtonModule,
@@ -39,7 +45,15 @@ import { DxiFieldModule, DxiItemModule, DxoLabelModule } from 'devextreme-angula
     DxDrawerModule,
     DxListModule,
     DxMenuModule,
-    DxTreeViewModule
+    DxTreeViewModule,
+    DxSelectBoxModule,
+    DxoEditingModule,
+    DxoItemModule,
+    DxoSummaryModule,
+    DxiTotalItemModule,
+    DxiGroupItemModule,
+    DxDataGridModule,
+
   ]
 })
 export class DevextremeModule { }
