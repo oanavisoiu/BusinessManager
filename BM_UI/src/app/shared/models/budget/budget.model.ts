@@ -5,5 +5,6 @@ export interface Budget{
   createdDate:Date;
   value:number;
   paymentTypeName:string;
+  budgetTypeName:string;
   companyId:string;
 }

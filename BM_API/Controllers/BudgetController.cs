@@ -13,10 +13,14 @@ namespace BM_API.Controllers
     {
         private readonly IBudgetRepository _budgetRepository;
         private readonly IPaymentTypeRepository _paymentTypeRepository;
-        public BudgetController(IBudgetRepository budgetRepository, IPaymentTypeRepository paymentTypeRepository)
+        private readonly IBudgetTypeRepository _budgetTypeRepository;
+        private readonly ICompanyEmployeeRepository _companyEmployeeRepository;
+        public BudgetController(IBudgetRepository budgetRepository, IPaymentTypeRepository paymentTypeRepository, IBudgetTypeRepository budgetTypeRepository, ICompanyEmployeeRepository companyEmployeeRepository)
         {
             _budgetRepository = budgetRepository;
             _paymentTypeRepository = paymentTypeRepository;
+            _budgetTypeRepository = budgetTypeRepository;
+            _companyEmployeeRepository = companyEmployeeRepository;
         }
         [HttpPost("add-budget")]
         public async Task<IActionResult> AddBudget([FromBody] Budget budget)
@@ -35,19 +39,33 @@ namespace BM_API.Controllers
                     CreatedDate = DateTime.Now,
                     CompanyId = budget.CompanyId,
                 };
-                PaymentType paymentType = await _paymentTypeRepository.GetPaymentTypeByNameAsync(budget.PaymentTypeName);
-                if (paymentType == null)
+                BudgetType budgetType = await _budgetTypeRepository.GetBudgetTypeByNameAsync(budget.BudgetTypeName);
+                if (budgetType == null)
                 {
                     return BadRequest();
                 }
-                budgetAdd.PaymentTypeName = paymentType.Name;
-                if (budget.PaymentTypeName == "Expense")
+                budgetAdd.BudgetTypeName = budgetType.Name;
+                if (budgetAdd.BudgetTypeName == "Salaries")
                 {
-                    budgetAdd.Value = -budget.Value;
+                    budgetAdd.PaymentTypeName = "Expense";
+                    budgetAdd.Value = -await _companyEmployeeRepository.GetSumOfSalariesAsync(budget.CompanyId);
                 }
-                else
+                else if (budgetAdd.BudgetTypeName == "Other")
                 {
-                    budgetAdd.Value = budget.Value;
+                    PaymentType paymentType = await _paymentTypeRepository.GetPaymentTypeByNameAsync(budget.PaymentTypeName);
+                    if (paymentType == null)
+                    {
+                        return BadRequest();
+                    }
+                    budgetAdd.PaymentTypeName = paymentType.Name;
+                    if (budget.PaymentTypeName == "Expense")
+                    {
+                        budgetAdd.Value = -budget.Value;
+                    }
+                    else
+                    {
+                        budgetAdd.Value = budget.Value;
+                    }
                 }
 
                 _budgetRepository.Add(budgetAdd);

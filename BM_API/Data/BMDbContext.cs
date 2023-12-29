@@ -18,5 +18,6 @@ namespace BM_API.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Budget> Budgets { get; set; }
         public DbSet<PaymentType> PaymentTypes { get; set; }
+        public DbSet<BudgetType> BudgetTypes { get; set; }
     }
 }

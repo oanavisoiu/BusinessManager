@@ -16,6 +16,8 @@ namespace BM_API.Models
         [Required]
         public string PaymentTypeName { get; set; }
         [Required]
+        public string BudgetTypeName { get; set; }
+        [Required]
         public Guid CompanyId { get; set; }
     }
 }

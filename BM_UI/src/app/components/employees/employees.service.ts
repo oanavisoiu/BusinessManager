@@ -40,5 +40,8 @@ export class EmployeesService {
       this.baseApiUrl + '/api/employee/delete-employee/' + id
     )
   }
+  getSumOfSalaries(id:string){
+    return this.http.get<number>(this.baseApiUrl+'/api/companyemployee/get-sum-of-salaries/'+id);
+  }
 
 }

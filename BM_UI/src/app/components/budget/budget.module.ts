@@ -4,18 +4,20 @@ import { DevextremeModule } from 'src/app/shared/materials/devextreme/devextreme
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BudgetRoutingModule } from './budget-routing.module';
 import { BudgetListComponent } from './budget-list/budget-list.component';
+import { FormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
-    BudgetListComponent,
+    BudgetListComponent
   ],
   imports: [
     CommonModule,
     DevextremeModule,
     SharedModule,
-    BudgetRoutingModule
+    BudgetRoutingModule,
+    FormsModule
   ]
 })
 export class BudgetModule { }
