@@ -3,18 +3,33 @@
   <div class="card-body">
     <div class="card-title">
 
-      <h5><i class="bi bi-check2-square"></i>Today's tasks</h5>
+      <h5><i class="bi bi-check2-square"></i>Tasks</h5>
     </div>
 
-    <div class="card-text">
-      <div *ngIf="todos.length!==0">
-        <div *ngFor="let todo of todos">
-
+    <div class="row card-text">
+      <div class="col-6 today-tasks">
+        <p class="subtitle">Today's tasks</p>
+        <div *ngIf="today.length!==0">
+          <div class="toDos" *ngFor="let todo of today">
+            <p class="my-0 text">{{todo.text}}</p>
+          </div>
+        </div>
+        <div *ngIf="today.length===0">
+          <p>There aren't any tasks for today.</p>
         </div>
       </div>
-      <div *ngIf="todos.length===0">
-        <p>There aren't any tasks for today.</p>
+      <div class="col-6 upcoming-tasks">
+        <p class="subtitle">Upcoming tasks</p>
+        <div *ngIf="upcoming.length!==0">
+          <div class="toDos" *ngFor="let todo of upcoming">
+            <p class="my-0 text">{{todo.text}}</p>
+          </div>
+        </div>
+        <div *ngIf="today.length===0">
+          <p>There aren't any upcoming tasks.</p>
+        </div>
       </div>
+
 
     </div>
   </div>

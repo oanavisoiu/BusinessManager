@@ -41,8 +41,16 @@
               <div class=""><i class="bi bi-credit-card-fill"></i> Budget</div>
             <div class="" *ngIf="rlaBud.isActive"><i class="bi bi-arrow-right"></i></div>
             </div>
-
           </button>
+
+          <button class="btn py-2 menu-item" routerLink="/to-do" #rlaToDo="routerLinkActive"
+            routerLinkActive="active-link" [disabled]="!(accountService.user$ | async)">
+            <div class="button-content">
+              <div class=""><i class="bi bi-check-square-fill"></i> To Do</div>
+            <div class="" *ngIf="rlaToDo.isActive"><i class="bi bi-arrow-right"></i></div>
+            </div>
+          </button>
+
         </div>
       </div>
       <router-outlet></router-outlet>

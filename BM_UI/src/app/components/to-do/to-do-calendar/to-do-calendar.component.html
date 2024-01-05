@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Schedule</h3>
+    </div>
+    <div class="card-body">
+      <dx-scheduler timeZone="America/Los_Angeles" [views]="['day', 'week', 'workWeek', 'month']" [dataSource]="toDos"
+        currentView="month" [currentDate]="currentDate" [firstDayOfWeek]="1" [startDayHour]="00" [endDayHour]="23"
+        [showAllDayPanel]="false" [height]="600">
+      </dx-scheduler>
+    </div>
+  </div>
+</div>

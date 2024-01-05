@@ -6,10 +6,15 @@
       <div *ngIf="budgets.length!==0">
         <div *ngFor="let budget of budgets">
           <p class="date mt-3 mb-0">{{budget.date|date:'dd MMMM YYYY'}}</p>
-          <p class="mb-0">{{budget.paymentTypeName}}:  {{budget.name}}</p>
+
           <div *ngIf="budget.value<0">
-              <p class="value">{{budget.value}}</p>
+            <p class="mb-0"></p>
+              <p class="expense">{{budget.name}}: {{budget.value}}</p>
           </div>
+          <div *ngIf="budget.value>=0">
+            <p class="mb-0"></p>
+            <p class="income">{{budget.name}}: +{{budget.value}}</p>
+        </div>
         </div>
       </div>
       <div *ngIf="budgets.length===0">

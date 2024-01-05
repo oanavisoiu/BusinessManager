@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DxButtonModule, DxDataGridModule, DxDateBoxModule, DxDrawerModule, DxFormModule, DxListModule, DxMenuModule, DxNumberBoxModule, DxSelectBoxModule, DxTabsModule, DxTextBoxModule, DxToolbarModule, DxTreeListModule, DxTreeViewModule } from 'devextreme-angular';
-import { DxiFieldModule, DxiGroupItemModule, DxiItemModule, DxiTotalItemModule, DxoEditingModule, DxoItemModule, DxoLabelModule, DxoLookupModule, DxoSummaryModule } from 'devextreme-angular/ui/nested';
+import { DxButtonModule, DxDataGridModule, DxDateBoxModule, DxDrawerModule, DxFormModule, DxListModule, DxMenuModule, DxNumberBoxModule, DxSchedulerModule, DxSelectBoxModule, DxTabsModule, DxTextBoxModule, DxToolbarModule, DxTreeListModule, DxTreeViewModule } from 'devextreme-angular';
+import { DxiFieldModule, DxiGroupItemModule, DxiItemModule, DxiResourceModule, DxiTotalItemModule, DxoEditingModule, DxoItemModule, DxoLabelModule, DxoLookupModule, DxoSummaryModule } from 'devextreme-angular/ui/nested';
 import { DxLookupModule, DxLookupTypes } from 'devextreme-angular/ui/lookup';
 import { exportDataGrid } from 'devextreme/pdf_exporter';
 
@@ -34,6 +34,8 @@ import { exportDataGrid } from 'devextreme/pdf_exporter';
     DxoEditingModule,
     DxLookupModule,
     DxNumberBoxModule,
+    DxSchedulerModule,
+    DxiResourceModule
   ],
   exports: [
     DxButtonModule,
@@ -58,7 +60,9 @@ import { exportDataGrid } from 'devextreme/pdf_exporter';
     DxiGroupItemModule,
     DxDataGridModule,
     DxLookupModule,
-    DxNumberBoxModule
+    DxNumberBoxModule,
+    DxSchedulerModule,
+    DxiResourceModule
   ]
 })
 export class DevextremeModule { }

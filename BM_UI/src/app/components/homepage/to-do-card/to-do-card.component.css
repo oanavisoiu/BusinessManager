@@ -1,3 +1,11 @@
-.card{
+.subtitle{
+  font-weight: bold;
+  align-self: center;
+}
 
+.today-tasks{
+  align-items: center;
+}
+.toDos{
+  align-items: center;
 }

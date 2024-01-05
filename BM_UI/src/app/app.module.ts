@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HomeComponent } from './components/homepage/home/home.component';
 import { AccountModule } from './components/account/account.module';
 import { SharedModule } from './shared/shared.module';
 import { ConfirmEmailComponent } from './components/account/confirm-email/confirm-email.component';
@@ -15,8 +14,8 @@ import { JwtInterceptor } from './shared/jwt.interceptor';
 import { DevextremeModule } from './shared/materials/devextreme/devextreme.module';
 import { SupplierModule } from './components/supplier/supplier.module';
 import { BudgetModule } from './components/budget/budget.module';
-import { EventCardComponent } from './components/homepage/event-card/event-card.component';
 import { HomepageModule } from './components/homepage/homepage.module';
+import { ToDoModule } from './components/to-do/to-do.module';
 
 
 @NgModule({
@@ -37,7 +36,8 @@ import { HomepageModule } from './components/homepage/homepage.module';
     DevextremeModule,
     SupplierModule,
     BudgetModule,
-    HomepageModule
+    HomepageModule,
+    ToDoModule
   ],
   providers: [
     {

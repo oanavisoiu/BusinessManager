@@ -44,6 +44,14 @@ const routes: Routes = [
       ),
     canActivate:[AuthorizationGuard]
   },
+  {
+    path: 'to-do',
+    loadChildren: () =>
+      import('./components/to-do/to-do.module').then(
+        (module) => module.ToDoModule
+      ),
+    canActivate:[AuthorizationGuard]
+  },
   { path: '**', component: NotFoundComponent, pathMatch:'full' },
 ];
 
