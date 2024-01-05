@@ -8,7 +8,7 @@ namespace BM_API.Profiles
     {
         public EmployeeProfile()
         {
-            CreateMap<EmployeeUpdateDTO, EmployeeUpdateDTO>()
+            CreateMap<Employee, EmployeeUpdateDTO>()
                 .ForMember(
                 dest => dest.FirstName,
                 from => from.MapFrom(x => $"{x.FirstName}"))

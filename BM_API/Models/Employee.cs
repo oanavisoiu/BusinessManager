@@ -23,7 +23,7 @@ namespace BM_API.Models
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         [Required]
-        public long Salary { get; set; }
+        public decimal Salary { get; set; }
         [Required]
         public string? Department { get; set; }
     }

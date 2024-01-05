@@ -1,4 +1,6 @@
-﻿using BM_API.Models;
+﻿using AutoMapper;
+using BM_API.DTOs.Budget;
+using BM_API.Models;
 using BM_API.Repositories.RepositoryInterfaces;
 using Mailjet.Client.Resources;
 using Microsoft.AspNetCore.Authorization;
@@ -15,12 +17,14 @@ namespace BM_API.Controllers
         private readonly IPaymentTypeRepository _paymentTypeRepository;
         private readonly IBudgetTypeRepository _budgetTypeRepository;
         private readonly ICompanyEmployeeRepository _companyEmployeeRepository;
-        public BudgetController(IBudgetRepository budgetRepository, IPaymentTypeRepository paymentTypeRepository, IBudgetTypeRepository budgetTypeRepository, ICompanyEmployeeRepository companyEmployeeRepository)
+        private readonly IMapper _mapper;
+        public BudgetController(IBudgetRepository budgetRepository, IPaymentTypeRepository paymentTypeRepository, IBudgetTypeRepository budgetTypeRepository, ICompanyEmployeeRepository companyEmployeeRepository, IMapper mapper)
         {
             _budgetRepository = budgetRepository;
             _paymentTypeRepository = paymentTypeRepository;
             _budgetTypeRepository = budgetTypeRepository;
             _companyEmployeeRepository = companyEmployeeRepository;
+            _mapper = mapper;
         }
         [HttpPost("add-budget")]
         public async Task<IActionResult> AddBudget([FromBody] Budget budget)
@@ -125,6 +129,29 @@ namespace BM_API.Controllers
             catch (Exception)
             {
                 return BadRequest();
+            }
+        }
+        [HttpGet("get-upcoming-budgets/{companyId}")]
+        public async Task<IActionResult> GetUpcomingBudgets(Guid companyId)
+        {
+            try
+            {
+                ICollection<UpcomingBudgetDTO> upcomingBudgets = new List<UpcomingBudgetDTO>();
+                ICollection<Budget> budgets = await _budgetRepository.GetUpcomingBudgetsAsync(companyId);
+                if(budgets.Count <= 0)
+                {
+                    return NotFound("Upcoming budgets bot found");
+                }
+                foreach (var budget in budgets)
+                {
+                    UpcomingBudgetDTO upcomingBudget = _mapper.Map<UpcomingBudgetDTO>(budget);
+                    upcomingBudgets.Add(upcomingBudget);
+                }
+                return Ok(upcomingBudgets);
+            }
+            catch(Exception)
+            {
+                return BadRequest("Db fail");
             }
         }
     }

@@ -21,6 +21,15 @@ namespace BM_API.Repositories
         {
             return await _bmDbContext.Budgets.FirstOrDefaultAsync(x => x.Id.Equals(id));
         }
+        public async Task<ICollection<Budget>> GetUpcomingBudgetsAsync(Guid companyId)
+        {
+            DateTime startDate = DateTime.Now;
+            DateTime endDate = startDate.AddMonths(1);
+            var budgets = _bmDbContext.Budgets.Where(b=>(b.CompanyId.Equals(companyId))&&((b.Date.Day>= startDate.Day && b.Date.Month == startDate.Month)||
+            (b.Date.Day <= endDate.Day && b.Date.Month == endDate.Month)||
+            (b.Date.Month > startDate.Month &&b.Date.Month < endDate.Month))).ToList();
+            return budgets;
+        }
 
     }
 }

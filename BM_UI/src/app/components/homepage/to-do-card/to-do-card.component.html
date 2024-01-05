@@ -1,0 +1,21 @@
+<div class="card mt-3">
+
+  <div class="card-body">
+    <div class="card-title">
+
+      <h5><i class="bi bi-check2-square"></i>Today's tasks</h5>
+    </div>
+
+    <div class="card-text">
+      <div *ngIf="todos.length!==0">
+        <div *ngFor="let todo of todos">
+
+        </div>
+      </div>
+      <div *ngIf="todos.length===0">
+        <p>There aren't any tasks for today.</p>
+      </div>
+
+    </div>
+  </div>
+</div>

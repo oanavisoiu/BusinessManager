@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BM_API.DTOs.Employee;
 using BM_API.Models;
 using BM_API.Repositories;
 using BM_API.Repositories.RepositoryInterfaces;
@@ -11,7 +12,7 @@ namespace BM_API.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class CompanyEmployeeController:ControllerBase
+    public class CompanyEmployeeController : ControllerBase
     {
         private readonly ICompanyEmployeeRepository? _companyEmployeeRepository;
         private readonly IEmployeeRepository? _employeeRepository;
@@ -104,7 +105,7 @@ namespace BM_API.Controllers
         {
             try
             {
-                if(employeeId==null)
+                if (employeeId == null)
                 {
                     return BadRequest("Invalid employee");
                 }
@@ -114,14 +115,14 @@ namespace BM_API.Controllers
                     return NotFound("Employee not found in company.");
                 }
                 _companyEmployeeRepository.Delete(companyEmployee);
-                if(await _companyEmployeeRepository.SaveChangesAsync())
-                { 
-                    return Ok(companyEmployee); 
+                if (await _companyEmployeeRepository.SaveChangesAsync())
+                {
+                    return Ok(companyEmployee);
                 }
                 return BadRequest("Db fail.");
 
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return BadRequest("Db fail.");
             }
@@ -131,7 +132,7 @@ namespace BM_API.Controllers
         {
             try
             {
-                if(companyId.Equals(Guid.Empty))
+                if (companyId.Equals(Guid.Empty))
                 {
                     return BadRequest("Company id is null.");
                 }
@@ -142,6 +143,29 @@ namespace BM_API.Controllers
             {
                 // Log the exception or handle it as needed
                 return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+        [HttpGet("get-employees-by-upcoming-birthdays/{companyId}")]
+        public async Task<IActionResult> GetEmployeesByUpcomingBirthdays(Guid companyId)
+        {
+            try
+            {
+                ICollection<EmployeeBirthdayDTO> employeesBirthdays=new List<EmployeeBirthdayDTO>();
+                ICollection<Employee> employees = await _companyEmployeeRepository.GetEmployeesBirthdaysForAMonthAsync(companyId);
+                if (employees.Count <= 0)
+                {
+                    return NotFound("Employees not found");
+                }
+                foreach (var employee in employees)
+                {
+                    EmployeeBirthdayDTO emp = _mapper.Map<EmployeeBirthdayDTO>(employee);
+                    employeesBirthdays.Add(emp);
+                }
+                return Ok(employeesBirthdays);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Db fail");
             }
         }
     }

@@ -1,54 +1,55 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" [routerLink]="(accountService.user$|async) ? '':null">Business Manager</a>
-    <div>
-      <dx-menu #menu [dataSource]="menuItems" displayExpr="text" orientation="horizontal"
-        [hideSubmenuOnMouseLeave]="false" (onItemClick)="itemClick($event)">
-      </dx-menu>
+<div style="display: flex; align-items: center; justify-content: space-between; background-color: rgb(243, 229, 234);"
+  *ngIf="(accountService.user$ | async) as user">
+  <dx-toolbar [items]="toolbarContent" style="background-color: rgb(243, 229, 234);"></dx-toolbar>
+  <app-logged-user></app-logged-user>
+</div>
+
+<div *ngIf="(accountService.user$ | async) as user">
+  <dx-drawer [openedStateMode]="'shrink'" [position]="'left'" [revealMode]="'slide'" template="template"
+    [(opened)]="isDrawerOpen" [closeOnOutsideClick]="false" style="background-color: rgb(249, 244, 246);">
+    <div class="dx-drawer-content">
+      <div *dxTemplate="let data of 'template'"
+        style="width: 200px; height:100vh; background-color: rgb(235, 213, 223);">
+
+        <div style="display: flex; flex-direction: column;">
+          <button class="btn mt-1 py-2 menu-item" routerLink="/" #rlaH="routerLinkActive" routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{ exact: true }" [disabled]="!(accountService.user$ | async)">
+            <div class="button-content">
+              <div class=""><i class="bi bi-house-fill"></i> Home</div>
+              <div class="" *ngIf="rlaH.isActive"><i class="bi arrow bi-arrow-right"></i></div>
+            </div>
+          </button>
+          <button class="btn py-2 menu-item" routerLink="/employees" #rlaEmp="routerLinkActive"
+            routerLinkActive="active-link" [disabled]="!(accountService.user$ | async)">
+            <div class="button-content">
+              <div class=""><i class="bi bi-people-fill"></i> Employees</div>
+            <div class="" *ngIf="rlaEmp.isActive"><i class="bi bi-arrow-right"></i></div>
+            </div>
+
+          </button>
+          <button class="btn py-2 menu-item" routerLink="/suppliers" #rlaSup="routerLinkActive"
+            routerLinkActive="active-link" [disabled]="!(accountService.user$ | async)">
+            <div class="button-content">
+              <div class=""><i class="bi bi-truck-flatbed"></i> Suppliers</div>
+            <div class="" *ngIf="rlaSup.isActive"><i class="bi bi-arrow-right"></i></div>
+            </div>
+
+          </button>
+          <button class="btn py-2 menu-item" routerLink="/budget" #rlaBud="routerLinkActive"
+            routerLinkActive="active-link" [disabled]="!(accountService.user$ | async)">
+            <div class="button-content">
+              <div class=""><i class="bi bi-credit-card-fill"></i> Budget</div>
+            <div class="" *ngIf="rlaBud.isActive"><i class="bi bi-arrow-right"></i></div>
+            </div>
+
+          </button>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
     </div>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item" *ngIf="(accountService.user$ | async) !== null">
-          <!-- <a class="nav-link active" aria-current="page" routerLink="/employees">Employees</a> -->
-        </li>
-      </ul>
 
-    </div>
-    <div class="logged-user">
-      <app-logged-user></app-logged-user>
-    </div>
-
-  </div>
-</nav>
-<!-- <dx-toolbar [items]="toolbarContent"> </dx-toolbar> -->
-<!-- <dx-drawer
-  [openedStateMode]="selectedOpenMode"
-  [position]="selectedPosition"
-  [revealMode]="selectedRevealMode"
-  template="template"
-  [(opened)]="isDrawerOpen"
-  [height]="400"
-  [closeOnOutsideClick]="true"
->
-  <div *dxTemplate="let data of 'template'" style="width: 200px">
-    <div *ngFor="let item of menuItems">
-      <dx-button class="panel-list dx-theme-accent-as-background-color"
-      ="{{item.text}}"
-    > -->
-
-<!-- </dx-button>
-    </div> -->
-
-
-
-<!-- <dx-list
-      class="panel-list dx-theme-accent-as-background-color"
-      [dataSource]="menuItems"
-      [hoverStateEnabled]="false"
-      [activeStateEnabled]="false"
-      [focusStateEnabled]="false"
-      (onItemClick)="onNavigationItemClick($event.itemData)"
-    >
-    </dx-list> -->
-<!-- </div>
-</dx-drawer> -->
+  </dx-drawer>
+</div>
+<div *ngIf="!(accountService.user$ | async) as user">
+  <router-outlet></router-outlet>
+</div>

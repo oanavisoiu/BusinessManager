@@ -1,4 +1,5 @@
 ﻿using BM_API.Data;
+using BM_API.DTOs.Employee;
 using BM_API.Models;
 using BM_API.Repositories.RepositoryInterfaces;
 using Microsoft.EntityFrameworkCore;
@@ -26,9 +27,9 @@ namespace BM_API.Repositories
 
             return employees;
         }
-        public async Task<long> GetSumOfSalariesAsync(Guid companyId)
+        public async Task<decimal> GetSumOfSalariesAsync(Guid companyId)
         {
-            long sum = 0;
+            decimal sum = 0;
             var companyEmployees = await GetEmployeesByCompanyAsync(companyId);
 
             foreach (var companyEmployee in companyEmployees)
@@ -39,6 +40,23 @@ namespace BM_API.Repositories
 
             return sum;
         }
-        
+
+        public async Task<ICollection<Employee>> GetEmployeesBirthdaysForAMonthAsync(Guid companyId)
+        {
+            DateTime startDate = DateTime.Now;
+            DateTime endDate = startDate.AddMonths(1);
+            var companyEmployees=await GetEmployeesByCompanyAsync(companyId);
+            var employees = companyEmployees
+                .Join(
+                _bmDbContext.Employees,
+                ce => ce.EmployeeId,
+                e => e.Id,
+                (ce,e)=>e)
+                .Where(e=>(e.BirthDate.Day>=startDate.Day&&e.BirthDate.Month==startDate.Month)||
+                (e.BirthDate.Day<=endDate.Day&&e.BirthDate.Month==endDate.Month)||
+                (e.BirthDate.Month>startDate.Month&&e.BirthDate.Month<endDate.Month));
+            return employees.ToList();
+        }
+    
     }
 }

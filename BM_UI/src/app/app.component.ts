@@ -9,26 +9,6 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-  selectedOpenMode = 'shrink';
-
-  selectedPosition = 'left';
-
-  selectedRevealMode = 'slide';
-
-  isDrawerOpen = true;
-
-  elementAttr: any;
-  toolbarContent = [{
-    widget: 'dxButton',
-    location: 'before',
-    options: {
-      icon: 'menu',
-      onClick: () => this.isDrawerOpen = !this.isDrawerOpen,
-    },
-  }];
-
-  selectedButton: string = '';
-
   constructor(public accountService:AccountService){}
 
   ngOnInit(): void {

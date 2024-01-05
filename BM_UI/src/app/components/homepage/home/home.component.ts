@@ -7,29 +7,33 @@ import { AddCompanyComponent } from '../../company/add-company/add-company.compo
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyService } from '../../company/company.service';
 import { Company } from 'src/app/shared/models/company/company.model';
+import { HomepageService } from '../homepage.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-
-
-  constructor(public accountService:AccountService, private modalService:NgbModal,public companyService:CompanyService) { }
+  birthdays: any;
+  budgets: any;
+  constructor(
+    public accountService: AccountService,
+    private modalService: NgbModal,
+    public companyService: CompanyService,
+    private homepageService: HomepageService
+  ) {}
 
   ngOnInit(): void {
-
   }
 
-  addCompanyClick()
-  {
-    const modalOptions:NgbModalOptions={
-      backdrop:'static',
-      keyboard:false
+  addCompanyClick() {
+    const modalOptions: NgbModalOptions = {
+      backdrop: 'static',
+      keyboard: false,
     };
-    const modalRef = this.modalService.open(AddCompanyComponent,modalOptions);
+    const modalRef = this.modalService.open(AddCompanyComponent, modalOptions);
   }
 
 
-  }
+}

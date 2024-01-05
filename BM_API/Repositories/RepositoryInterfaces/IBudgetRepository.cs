@@ -7,6 +7,7 @@ namespace BM_API.Repositories.RepositoryInterfaces
     {
         Task<ICollection<Budget>> GetBudgetsByCompanyIdAsync(Guid id);
         Task<Budget> GetBudgetByIdAsync(Guid id);
+        Task<ICollection<Budget>> GetUpcomingBudgetsAsync(Guid companyId);
 
     }
 }

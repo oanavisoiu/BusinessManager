@@ -15,13 +15,14 @@ import { JwtInterceptor } from './shared/jwt.interceptor';
 import { DevextremeModule } from './shared/materials/devextreme/devextreme.module';
 import { SupplierModule } from './components/supplier/supplier.module';
 import { BudgetModule } from './components/budget/budget.module';
+import { EventCardComponent } from './components/homepage/event-card/event-card.component';
+import { HomepageModule } from './components/homepage/homepage.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    ConfirmEmailComponent,
+    ConfirmEmailComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +36,8 @@ import { BudgetModule } from './components/budget/budget.module';
     EmployeesModule,
     DevextremeModule,
     SupplierModule,
-    BudgetModule
+    BudgetModule,
+    HomepageModule
   ],
   providers: [
     {
