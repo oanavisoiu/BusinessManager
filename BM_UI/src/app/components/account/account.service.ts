@@ -24,9 +24,18 @@ export class AccountService {
     private companyService: CompanyService
   ) {}
 
-  refreshUser() {
+  refreshUser(jwt: string | null) {
+    if (jwt == null) {
+      this.userSource.next(null);
+      return undefined;
+    }
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Bearer ' + jwt);
+
     return this.http
-      .get<User>(this.baseApiUrl + '/api/Account/refresh-user-token')
+      .get<User>(this.baseApiUrl + '/api/Account/refresh-user-token', {
+        headers,
+      })
       .pipe(
         map((user: User) => {
           if (user) {

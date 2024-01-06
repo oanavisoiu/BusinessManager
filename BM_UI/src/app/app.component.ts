@@ -15,12 +15,18 @@ export class AppComponent implements OnInit {
       this.refreshUser();
   }
 
-  refreshUser(){
-      this.accountService.refreshUser()?.subscribe({
-        next: _=>{},
-        error: _=>{
-          this.accountService.logout();
-        }
-      });
+    refreshUser(){
+      const jwt = this.accountService.getJWT();
+      if(jwt){
+        this.accountService.refreshUser(jwt)?.subscribe({
+          next: _=>{},
+          error: _=>{
+            this.accountService.logout();
+          }
+        });
+      }
+      else{
+        this.accountService.refreshUser(null)?.subscribe();
+      }
     }
   }
