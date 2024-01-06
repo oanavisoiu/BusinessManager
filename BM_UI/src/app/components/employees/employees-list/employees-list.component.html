@@ -5,7 +5,7 @@
     </div>
     <div class="card-body">
       <div class="table-responsive">
-          <dx-tree-list id="employees" [keyExpr]="'id'" [dataSource]="employees" [columnAutoWidth]="true"
+          <dx-tree-list *ngIf="(companyService.company$ | async)" id="employees" [keyExpr]="'id'" [dataSource]="employees" [columnAutoWidth]="true"
             [wordWrapEnabled]="true" [showBorders]="true">
             <dxo-search-panel [visible]="true" width="250"></dxo-search-panel>
             <dxo-header-filter [visible]="true"></dxo-header-filter>
@@ -101,6 +101,10 @@
               <dxi-button name="delete" icon="bi bi-trash"></dxi-button>
             </dxi-column>
           </dx-tree-list>
+          <div *ngIf="!(companyService.company$ | async)">
+            <p>You have to set your company pefore you can interract with this page.</p>
+            <button class="btn btn-primary" [routerLink]="['/']">Go Back</button>
+          </div>
         </div>
       </div>
     </div>

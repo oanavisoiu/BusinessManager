@@ -3,8 +3,20 @@
     <h2 class="mb-5">Welcome to Business Manager!</h2>
     <h3>Let's get started!</h3>
     <div class="d-flex justify-content-center align-items-center mt-5">
-      <button class="btn btn-primary mx-5" [routerLink]="['/account/login']">Login</button>
-      <button class="btn btn-primary mx-5" [routerLink]="['/account/register']">Register</button>
+      <dx-button class="mx-5"
+            stylingMode="contained"
+            text="Login"
+            type="normal"
+            [width]="120"
+            routerLink="/account/login"
+          ></dx-button>
+          <dx-button class="mx-5"
+            stylingMode="contained"
+            text="Register"
+            type="normal"
+            [width]="120"
+            [routerLink]="['/account/register']"
+          ></dx-button>
     </div>
   </div>
 </div>

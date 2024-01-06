@@ -26,7 +26,7 @@ export class EmployeesListComponent implements OnInit {
                 employeeId: ''
               };
 
-  constructor(private employeesService: EmployeesService, private companyService:CompanyService) {
+  constructor(private employeesService: EmployeesService, public companyService:CompanyService) {
     this.maxDate = new Date(this.maxDate.setFullYear(this.maxDate.getFullYear() - 15));
   }
 

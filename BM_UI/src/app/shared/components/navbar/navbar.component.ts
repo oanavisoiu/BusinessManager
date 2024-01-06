@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../../../components/account/account.service';
 import { Router } from '@angular/router';
+import { CompanyService } from 'src/app/components/company/company.service';
 
 @Component({
   selector: 'app-navbar',
@@ -21,7 +22,7 @@ export class NavbarComponent implements OnInit {
   }];
 
 
-  constructor(public accountService:AccountService){}
+  constructor(public accountService:AccountService, public companyService:CompanyService){}
 
 
   ngOnInit(): void {
