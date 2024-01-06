@@ -1,4 +1,5 @@
 ﻿using BM_API.Data;
+using BM_API.DTOs.Budget;
 using BM_API.Models;
 using BM_API.Repositories.RepositoryInterfaces;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,45 @@ namespace BM_API.Repositories
             (b.Date.Month > startDate.Month &&b.Date.Month < endDate.Month))).ToList();
             return budgets;
         }
+        public async Task<ICollection<DayBudgetDTO>> Get30DayBudget(Guid companyId)
+        {
+            DateTime endDate = DateTime.Today;
+            DateTime startDate = endDate.AddDays(-30);
+            var budgets = await GetBudgetsByCompanyIdAsync(companyId);
+            ICollection<DayBudgetDTO> dayBudgets = new List<DayBudgetDTO>();
+
+            for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+            {
+                decimal income = 0;
+                decimal expense = 0;
+
+                foreach (var budget in budgets)
+                {
+                    if (budget.Date.Date == date.Date)
+                    {
+                        if (budget.PaymentTypeName == "Income")
+                        {
+                            income += budget.Value;
+                        }
+                        else if (budget.PaymentTypeName == "Expense")
+                        {
+                            expense += budget.Value;
+                        }
+                    }
+                }
+
+                DayBudgetDTO dayBudget = new DayBudgetDTO
+                {
+                    Income = income,
+                    Expense = expense,
+                    Date = date
+                };
+                dayBudgets.Add(dayBudget);
+            }
+
+            return dayBudgets;
+        }
+
 
     }
 }

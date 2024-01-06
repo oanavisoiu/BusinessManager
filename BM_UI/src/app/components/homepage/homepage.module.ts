@@ -8,6 +8,8 @@ import { BirthdaysCardComponent } from './birthdays-card/birthdays-card.componen
 import { BudgetsCardComponent } from './budgets-card/budgets-card.component';
 import { ToDoCardComponent } from './to-do-card/to-do-card.component';
 import { SetCompanyComponent } from './set-company/set-company.component';
+import { BudgetModule } from '../budget/budget.module';
+import { ChartCardComponent } from './chart-card/chart-card.component';
 
 
 
@@ -18,12 +20,14 @@ import { SetCompanyComponent } from './set-company/set-company.component';
     BirthdaysCardComponent,
     BudgetsCardComponent,
     ToDoCardComponent,
-    SetCompanyComponent
+    SetCompanyComponent,
+    ChartCardComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
-    DevextremeModule
+    DevextremeModule,
+    BudgetModule
   ]
 })
 export class HomepageModule { }

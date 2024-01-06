@@ -154,5 +154,23 @@ namespace BM_API.Controllers
                 return BadRequest("Db fail");
             }
         }
+        [HttpGet("get-day-budgets/{companyId}")]
+        public async Task<IActionResult> GetDayBudgets(Guid companyId)
+        {
+            try
+            {
+                ICollection<DayBudgetDTO> dayBudgets = await _budgetRepository.Get30DayBudget(companyId);
+                if(dayBudgets.Count <= 0)
+                {
+                    return NotFound("No budgets for the last 30 days found");
+                }
+                return Ok(dayBudgets);
+                
+            }
+            catch (Exception)
+            {
+                return BadRequest("Db fail");
+            }
+        }
     }
 }

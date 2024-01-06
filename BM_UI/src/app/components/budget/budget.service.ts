@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from "src/environments/environment";
 import { Budget } from "src/app/shared/models/budget/budget.model";
 import { BudgetType } from "src/app/shared/models/budget/budget-type.model";
+import { DayBudget } from "src/app/shared/models/budget/day-budget.model";
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,8 @@ export class BudgetService {
   }
   deleteBudget(id:string){
     return this.http.delete<Budget>(this.baseApiUrl+'/api/budget/delete-budget/'+id);
+  }
+  getDayBudgets(id:string){
+    return this.http.get<DayBudget[]>(this.baseApiUrl+'/api/budget/get-day-budgets/'+id);
   }
 }
