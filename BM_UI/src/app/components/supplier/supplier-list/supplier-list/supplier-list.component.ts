@@ -21,7 +21,7 @@ export class SupplierListComponent implements OnInit {
                 supplierId: ''
               };
 
-  constructor(private supplierService: SupplierService, private companyService:CompanyService) {}
+  constructor(private supplierService: SupplierService, public companyService:CompanyService) {}
 
   ngOnInit(): void {
     this.operations();

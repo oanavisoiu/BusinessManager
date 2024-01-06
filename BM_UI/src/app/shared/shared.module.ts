@@ -10,6 +10,7 @@ import { NotificationComponent } from './components/modals/notification/notifica
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoggedUserComponent } from './components/logged-user/logged-user.component';
 import { DevextremeModule } from './materials/devextreme/devextreme.module';
+import { CompanyNotSetComponent } from './components/company-not-set/company-not-set.component';
 
 
 
@@ -19,7 +20,8 @@ import { DevextremeModule } from './materials/devextreme/devextreme.module';
     ValidationMessagesComponent,
     NotificationComponent,
     NavbarComponent,
-    LoggedUserComponent
+    LoggedUserComponent,
+    CompanyNotSetComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +38,8 @@ import { DevextremeModule } from './materials/devextreme/devextreme.module';
     ValidationMessagesComponent,
     NgbModalModule,
     NavbarComponent,
-    LoggedUserComponent
+    LoggedUserComponent,
+    CompanyNotSetComponent
   ]
 })
 export class SharedModule { }

@@ -102,8 +102,7 @@
             </dxi-column>
           </dx-tree-list>
           <div *ngIf="!(companyService.company$ | async)">
-            <p>You have to set your company pefore you can interract with this page.</p>
-            <button class="btn btn-primary" [routerLink]="['/']">Go Back</button>
+            <app-company-not-set></app-company-not-set>
           </div>
         </div>
       </div>

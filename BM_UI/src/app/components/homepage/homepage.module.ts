@@ -7,6 +7,7 @@ import { EventCardComponent } from './event-card/event-card.component';
 import { BirthdaysCardComponent } from './birthdays-card/birthdays-card.component';
 import { BudgetsCardComponent } from './budgets-card/budgets-card.component';
 import { ToDoCardComponent } from './to-do-card/to-do-card.component';
+import { SetCompanyComponent } from './set-company/set-company.component';
 
 
 
@@ -16,7 +17,8 @@ import { ToDoCardComponent } from './to-do-card/to-do-card.component';
     EventCardComponent,
     BirthdaysCardComponent,
     BudgetsCardComponent,
-    ToDoCardComponent
+    ToDoCardComponent,
+    SetCompanyComponent
   ],
   imports: [
     CommonModule,

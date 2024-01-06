@@ -25,7 +25,7 @@ export class BudgetListComponent implements OnInit {
 
   constructor(
     private budgetService: BudgetService,
-    private companyService: CompanyService,
+    public companyService: CompanyService,
     private employeesService:EmployeesService){}
 
   ngOnInit(): void {

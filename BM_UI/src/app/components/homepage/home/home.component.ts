@@ -27,13 +27,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addCompanyClick() {
-    const modalOptions: NgbModalOptions = {
-      backdrop: 'static',
-      keyboard: false,
-    };
-    const modalRef = this.modalService.open(AddCompanyComponent, modalOptions);
-  }
+
 
 
 }

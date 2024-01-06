@@ -15,7 +15,7 @@ export class ToDoCalendarComponent implements OnInit {
 
   currentDate:any;
   toDos:any;
-  constructor(private companyService:CompanyService,private toDoService:ToDoService) { }
+  constructor(public companyService:CompanyService,private toDoService:ToDoService) { }
 
   ngOnInit(): void {
     this.currentDate=new Date();

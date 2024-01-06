@@ -5,7 +5,7 @@
     </div>
     <div class="card-body">
       <div class="table-responsive">
-        <dx-tree-list id="suppliers" [keyExpr]="'id'" [dataSource]="suppliers" [columnAutoWidth]="true"
+        <dx-tree-list *ngIf="(companyService.company$ | async)" id="suppliers" [keyExpr]="'id'" [dataSource]="suppliers" [columnAutoWidth]="true"
           [wordWrapEnabled]="true" [showBorders]="true">
           <dxo-search-panel [visible]="true" width="250"></dxo-search-panel>
           <dxo-header-filter [visible]="true"></dxo-header-filter>
@@ -45,6 +45,9 @@
             <dxi-button name="delete" icon="bi bi-trash"></dxi-button>
           </dxi-column>
         </dx-tree-list>
+        <div *ngIf="!(companyService.company$ | async)">
+            <app-company-not-set></app-company-not-set>
+        </div>
       </div>
     </div>
   </div>
