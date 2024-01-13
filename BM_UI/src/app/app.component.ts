@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from './components/account/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,24 +9,24 @@ import { AccountService } from './components/account/account.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private accountService:AccountService){}
+  constructor(public accountService:AccountService){}
 
   ngOnInit(): void {
       this.refreshUser();
   }
 
-  refreshUser(){
-    const jwt = this.accountService.getJWT();
-    if(jwt){
-      this.accountService.refreshUser(jwt)?.subscribe({
-        next: _=>{},
-        error: _=>{
-          this.accountService.logout();
-        }
-      });
-    }
-    else{
-      this.accountService.refreshUser(null)?.subscribe();
+    refreshUser(){
+      const jwt = this.accountService.getJWT();
+      if(jwt){
+        this.accountService.refreshUser(jwt)?.subscribe({
+          next: _=>{},
+          error: _=>{
+            this.accountService.logout();
+          }
+        });
+      }
+      else{
+        this.accountService.refreshUser(null)?.subscribe();
+      }
     }
   }
-}

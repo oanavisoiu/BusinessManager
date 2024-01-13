@@ -1,38 +1,110 @@
-<div class="container my-5">
-  <h1 class="mb-3">Employees </h1>
-  <div class="my-5">
-    <button type="button" class="btn btn-primary" [routerLink]="['/employees/add']" (click)="openAddEmployeeModal()">
-      Add Employee
-    </button>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Employees</h3>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+          <dx-tree-list *ngIf="(companyService.company$ | async)" id="employees" [keyExpr]="'id'" [dataSource]="employees" [columnAutoWidth]="true"
+            [wordWrapEnabled]="true" [showBorders]="true">
+            <dxo-search-panel [visible]="true" width="250"></dxo-search-panel>
+            <dxo-header-filter [visible]="true"></dxo-header-filter>
+            <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+
+            <dxo-scrolling mode="standard"></dxo-scrolling>
+            <dxo-paging [enabled]="true" [pageSize]="10"> </dxo-paging>
+            <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true">
+            </dxo-pager>
+
+            <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
+              <dxo-popup title="Employee Info" [showTitle]="true" [width]="700"></dxo-popup>
+            </dxo-editing>
+            <dxi-column dataField="firstName" caption="First Name">
+              <dxi-validation-rule
+              type="required"
+              ></dxi-validation-rule>
+              <dxi-validation-rule
+              type="stringLength"
+              [min]="3"
+              [max]="15"
+              message="First name should be between 3 and 15 characters."
+              ></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="lastName" caption="Last Name">
+              <dxi-validation-rule
+              type="required"
+              ></dxi-validation-rule>
+              <dxi-validation-rule
+              type="stringLength"
+              [min]="3"
+              [max]="15"
+              message="Last name should be between 3 and 15 characters."
+              ></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="birthDate" caption="Birthdate" dataType="date">
+              <dxi-validation-rule
+              type="required"
+              ></dxi-validation-rule>
+              <dxi-validation-rule
+              type="range"
+              [max]="maxDate"
+              message="Employees must be at least 15."
+            ></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="email" caption="Email">
+              <dxi-validation-rule
+              type="email"
+              ></dxi-validation-rule>
+              <dxi-validation-rule
+              type="required"
+              ></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="phoneNumber" caption="Phone Number">
+              <dxi-validation-rule
+              type="required"
+              ></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="address" caption="Address">
+              <dxi-validation-rule
+              type="required"
+              ></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="city" caption="City">
+              <dxi-validation-rule
+              type="required"
+              ></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="startDate" caption="Start Date" dataType="date">
+              <dxi-validation-rule
+              type="required"
+              ></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="endDate" caption="End Date" dataType="date">
+              <dxi-validation-rule
+              type="range"
+              [min]="minDate"
+              message="End date can't be before today's date. "
+            ></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="department" caption="Department">
+              <dxi-validation-rule
+              type="required"
+              ></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column dataField="salary" caption="Salary" dataType="Number">
+              <dxi-validation-rule
+              type="required"
+              ></dxi-validation-rule>
+            </dxi-column>
+            <dxi-column type="buttons" caption="Actions">
+              <dxi-button name="edit" icon="bi bi-pencil-square"></dxi-button>
+              <dxi-button name="delete" icon="bi bi-trash"></dxi-button>
+            </dxi-column>
+          </dx-tree-list>
+          <div *ngIf="!(companyService.company$ | async)">
+            <app-company-not-set></app-company-not-set>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <table class="table" *ngIf="employees && employees.length >0">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Salary</th>
-        <th>Department</th>
-        <th> </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let employee of employees">
-        <td>{{employee.id}}</td>
-        <td>{{employee.name}}</td>
-        <td>{{employee.email}}</td>
-        <td>{{employee.phone}}</td>
-        <td>{{employee.salary}}</td>
-        <td>{{employee.department}}</td>
-        <td>
-          <button type="button" class="btn btn-primary" [routerLink]="['/employees', 'view', employee.id]" (click)="openEditModal(employee)">
-            Edit Employee
-          </button>
-          <!-- <i type="button" class="bi bi-trash"></i> -->
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <p *ngIf="!employees || employees.length==0">No employees found</p>
-</div>

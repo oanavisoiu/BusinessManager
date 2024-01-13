@@ -1,0 +1,36 @@
+<div class="card mt-3">
+
+  <div class="card-body">
+    <div class="card-title">
+
+      <h5><i class="bi bi-check2-square"></i>Tasks</h5>
+    </div>
+
+    <div class="row card-text">
+      <div class="col-6 today-tasks">
+        <p class="subtitle">Today's tasks</p>
+        <div *ngIf="today.length!==0">
+          <div class="toDos" *ngFor="let todo of today">
+            <p class="my-0 text">{{todo.text}}</p>
+          </div>
+        </div>
+        <div *ngIf="today.length===0">
+          <p>There aren't any tasks for today.</p>
+        </div>
+      </div>
+      <div class="col-6 upcoming-tasks">
+        <p class="subtitle">Upcoming tasks</p>
+        <div *ngIf="upcoming.length!==0">
+          <div class="toDos" *ngFor="let todo of upcoming">
+            <p class="my-0 text">{{todo.text}}</p>
+          </div>
+        </div>
+        <div *ngIf="today.length===0">
+          <p>There aren't any upcoming tasks.</p>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

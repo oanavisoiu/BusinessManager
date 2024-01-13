@@ -1,0 +1,22 @@
+<div class="card mt-3">
+
+  <div class="card-body">
+    <div class="card-title">
+
+      <h5><i class="bi bi-cake"></i>Upcoming birthdays</h5>
+    </div>
+
+    <div class="card-text">
+      <div *ngIf="birthdays.length!==0">
+        <div *ngFor="let birthday of birthdays">
+          <p class="date mb-0 mt-3">{{birthday.birthdate|date:'dd MMMM'}}</p>
+          <p class="mt-0"> {{birthday.firstName}} {{birthday.lastName}}</p>
+        </div>
+      </div>
+      <div *ngIf="birthdays.length===0">
+        <p>There aren't any upcoming birthdays.</p>
+      </div>
+
+    </div>
+  </div>
+</div>

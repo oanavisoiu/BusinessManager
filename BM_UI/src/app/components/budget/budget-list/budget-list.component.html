@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Budget</h3>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <dx-data-grid *ngIf="(companyService.company$ | async)" id="budgets" [dataSource]="budgets" [columnAutoWidth]="true" [wordWrapEnabled]="true"
+          [showBorders]="true" (onExporting)="onExporting($event)">
+          <dxo-search-panel [visible]="true" width="250"></dxo-search-panel>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+          <dxo-scrolling mode="standard"></dxo-scrolling>
+
+          <dxo-paging [enabled]="true" [pageSize]="10"> </dxo-paging>
+          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true">
+          </dxo-pager>
+
+          <dxo-editing mode="popup" title="Budget info" [allowAdding]="true" [allowDeleting]="true">
+            <dxo-popup title="Budget Info" [showTitle]="true" [width]="700"></dxo-popup>
+            <dxo-form [colCount]="1" [formData]="formData">
+
+              <dxi-item dataField="budgetTypeName" template="budgetTypeTemplate" editorType="dxSelectBox"
+                [editorOptions]="{items:budgetTypes}">
+                <div *dxTemplate="let data of 'budgetTypeTemplate'">
+                  <dx-lookup  [dataSource]="budgetTypes" [(value)]="formData.budgetType" (onValueChanged)="changeBudgetType($event)"></dx-lookup>
+                </div>
+              </dxi-item>
+
+              <dxi-item dataField="name" >
+              </dxi-item>
+
+              <dxi-item dataField="date" caption="Date" editorType="dxDateBox">
+              </dxi-item>
+
+              <dxi-item dataField="createdDate" caption="Created Date" editorType="dxDateBox"
+                [editorOptions]="{ placeholder: todayDate }">
+              </dxi-item>
+
+              <dxi-item dataField="value" template="template" caption="Value" dataType="currency">
+                <div *dxTemplate="let data of 'template'">
+                  <dx-number-box [(value)]="formData.value" [disabled]="isBudgetTypeNameSalaries"></dx-number-box>
+                </div>
+              </dxi-item>
+
+              <dxi-item dataField="paymentTypeName" template="paymentTypeTemplate" editorType="dxSelectBox" [editorOptions]="{ items: paymentTypes }">
+                <dxo-lookup [dataSource]="paymentTypes"></dxo-lookup>
+                <div *dxTemplate="let data of 'paymentTypeTemplate'">
+                  <dx-lookup  [dataSource]="paymentTypes" [(value)]="formData.paymentType" [disabled]="isBudgetTypeNameSalaries"></dx-lookup>
+                </div>
+              </dxi-item>
+
+            </dxo-form>
+          </dxo-editing>
+
+          <dxi-column dataField="budgetTypeName" caption="Budget type"></dxi-column>
+          <dxi-column dataField="name" caption="Name"></dxi-column>
+          <dxi-column dataField="date" dataType="date" caption="Date"></dxi-column>
+          <dxi-column dataField="createdDate" dataType="date" caption="Created date"
+            [allowEditing]="false"></dxi-column>
+          <dxi-column dataField="value" caption="Value"></dxi-column>
+          <dxi-column dataField="paymentTypeName" caption="Payment type"></dxi-column>
+
+          <dxi-column type="buttons" caption="Actions">
+            <dxi-button name="delete" icon="bi bi-trash"></dxi-button>
+          </dxi-column>
+          <dxo-summary>
+            <dxi-total-item column="value" summaryType="sum"></dxi-total-item>
+          </dxo-summary>
+          <dxo-export [enabled]="true" [formats]="['pdf']" [allowExportSelectedData]="true"></dxo-export>
+        </dx-data-grid>
+        <div *ngIf="!(companyService.company$ | async)">
+          <app-company-not-set></app-company-not-set>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

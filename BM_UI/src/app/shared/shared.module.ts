@@ -8,6 +8,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationComponent } from './components/modals/notification/notification.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { LoggedUserComponent } from './components/logged-user/logged-user.component';
+import { DevextremeModule } from './materials/devextreme/devextreme.module';
+import { CompanyNotSetComponent } from './components/company-not-set/company-not-set.component';
 
 
 
@@ -16,7 +19,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     NotFoundComponent,
     ValidationMessagesComponent,
     NotificationComponent,
-    NavbarComponent
+    NavbarComponent,
+    LoggedUserComponent,
+    CompanyNotSetComponent
   ],
   imports: [
     CommonModule,
@@ -24,6 +29,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     RouterModule,
     HttpClientModule,
     NgbModalModule,
+    DevextremeModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -31,7 +37,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     HttpClientModule,
     ValidationMessagesComponent,
     NgbModalModule,
-    NavbarComponent
+    NavbarComponent,
+    LoggedUserComponent,
+    CompanyNotSetComponent
   ]
 })
 export class SharedModule { }

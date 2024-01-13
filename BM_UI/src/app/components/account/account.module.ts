@@ -5,6 +5,9 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AccountComponent } from './account/account.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { SendEmailComponent } from './send-email/send-email.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { DevextremeModule } from 'src/app/shared/materials/devextreme/devextreme.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     AccountRoutingModule,
-    SharedModule
+    SharedModule,
+    DevextremeModule
   ]
 })
 export class AccountModule { }

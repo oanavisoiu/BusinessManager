@@ -1,1 +1,19 @@
-<p>home works!</p>
+<div class="container">
+  <div *ngIf="(accountService.user$|async) as user">
+    <div *ngIf="!(companyService.company$|async) as company">
+      <app-set-company></app-set-company>
+    </div>
+    <div *ngIf="(companyService.company$|async) as company">
+      <div class="row">
+        <div class="col-4 cards">
+          <app-to-do-card></app-to-do-card>
+          <app-birthdays-card></app-birthdays-card>
+          <app-budgets-card></app-budgets-card>
+        </div>
+        <div class="col-8">
+            <app-chart-card></app-chart-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

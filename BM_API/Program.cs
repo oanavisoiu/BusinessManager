@@ -1,5 +1,9 @@
+using AutoMapper;
 using BM_API.Data;
+using BM_API.DTOs.EmployeeUpdateDto;
 using BM_API.Models;
+using BM_API.Repositories;
+using BM_API.Repositories.RepositoryInterfaces;
 using BM_API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -69,6 +73,21 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
     };
 });
 
+builder.Services.AddTransient<IRepository, Repository>();
+builder.Services.AddTransient<IAccountRepository, AccountRepository>();
+builder.Services.AddTransient<ICompanyRepository, CompanyRepository>();
+builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddTransient<ICompanyEmployeeRepository, CompanyEmployeeRepository>();
+builder.Services.AddTransient<ISupplierRepository, SupplierRepository>();
+builder.Services.AddTransient<ICompanySupplierRepository, CompanySupplierRepository>();
+builder.Services.AddTransient<IBudgetRepository, BudgetRepository>();
+builder.Services.AddTransient<IPaymentTypeRepository, PaymentTypeRepository>();
+builder.Services.AddTransient<IBudgetTypeRepository, BudgetTypeRepository>();
+builder.Services.AddTransient<IToDoRepository,ToDoRepository>();
+//builder.Services.AddTransient<IProductRepository, ProductRepository>();
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -78,6 +97,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.UseHttpsRedirection();
 

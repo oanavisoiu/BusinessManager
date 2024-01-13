@@ -1,9 +1,13 @@
-import { EmployeesService } from './../../../services/employees/employees.service';
+import { EmployeesService } from '../employees.service';
 import { Component, OnInit } from '@angular/core';
-import { Employee } from 'src/app/shared/models/employee.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AddEmployeeComponent } from '../add-employee/add-employee.component';
-import { ViewEmployeeComponent } from '../view-employee/view-employee.component';
+import { CompanyService } from '../../company/company.service';
+import { Router } from '@angular/router';
+import { Employee } from 'src/app/shared/models/employee/employee.model';
+import CustomStore from 'devextreme/data/custom_store';
+import { catchError, from, of } from 'rxjs';
+import { EmployeeUpdate } from 'src/app/shared/models/employee/employee-update.model';
+import { CompanyEmployee } from 'src/app/shared/models/employee/company-employee.model';
 
 @Component({
   selector: 'app-employees-list',
@@ -12,35 +16,103 @@ import { ViewEmployeeComponent } from '../view-employee/view-employee.component'
 })
 export class EmployeesListComponent implements OnInit {
 
-  employees: Employee[]=[];
-  constructor(private employeesService: EmployeesService, private modalService: NgbModal) {
-    this.reloadData();
-  }
+  employees: any;
+  errors="";
+  maxDate: Date = new Date();
+  minDate:Date = new Date();
+  companyEmployee: CompanyEmployee = {
+                id: '',
+                companyId: '',
+                employeeId: ''
+              };
 
+  constructor(private employeesService: EmployeesService, public companyService:CompanyService) {
+    this.maxDate = new Date(this.maxDate.setFullYear(this.maxDate.getFullYear() - 15));
+  }
 
   ngOnInit(): void {
-    this.reloadData();
+
+    this.operations();
   }
 
-  openEditModal(employee:Employee){
-    const modalRef = this.modalService.open(ViewEmployeeComponent);
-    modalRef.componentInstance.employee = { ...employee };
-  }
+  operations() {
+    this.companyService.company$.subscribe(
+      (company) => {
+        if (company) {
+          const dataService=this.employeesService;
+          this.employees = new CustomStore({
+            key: 'id',
+            load: () => {
+              return dataService.getAllEmployees(company.id).pipe(
+                catchError((error) => {
+                  console.error('Error loading employees:', error);
+                  return of([]);
+                })
+              ).toPromise();
 
-  openAddEmployeeModal(){
-    const modalRef = this.modalService.open(AddEmployeeComponent);
-  }
+            },
+            update: (key, values) => {
+              const employeeId = key;
+              return new Promise((resolve, reject) => {
+                dataService.getEmployee(employeeId).subscribe({
+                  next: (employee) => {
+                    Object.assign(employee, values);
+                    const { id, ...updatedValues } = employee;
+                    const updatedEmployee=updatedValues;
+                    dataService.updateEmployee(employeeId, updatedEmployee).subscribe({
+                      next: (result) => {
+                        resolve(employee);
+                      },
+                      error: (error) => {
+                        reject(error);
+                      }
+                    });
+                  },
+                  error: (error) => {
+                    reject(error);
+                  }
+                });
+              });
+            },
+            insert: (values:any) => {
+              return new Promise<Employee>((resolve, reject) => {
+                const newEmployee: Employee = { ...values };
 
-  reloadData(){
-    this.employeesService.getAllEmployees().subscribe({
-      next:(employees) =>
-      {
-        this.employees=employees;
-      },
-      error:(response) =>
-      {
-        console.log(response);
+                dataService.addEmployee(newEmployee).subscribe({
+                  next: (emp: Employee) => {
+                    this.companyEmployee.employeeId = emp.id;
+                    this.companyEmployee.companyId = company.id;
+
+                    dataService.addCompanyEmployee(this.companyEmployee).subscribe({
+                      next: (company) => {
+                        resolve(emp);
+                      },
+                      error: (companyError) => {
+                        reject(companyError);
+                      },
+                    });
+                  },
+                  error: (empError) => {
+                    reject(empError);
+                  },
+                });
+              });
+            },
+            remove: (key) => {
+              return new Promise<void>((resolve, reject) => {
+                dataService.deleteEmployee(key).subscribe({
+                  next: () => {
+                    resolve();
+                  },
+                  error: (err) => {
+                    reject(err);
+                  }
+                });
+              });
+            }
+          });
+        }
       }
-    })
+    );
   }
 }
