@@ -16,5 +16,6 @@ namespace BM_API.Models
         public Guid CompanyId { get; set; }
         public string RecurrenceRule { get; set; }
         public bool AllDay { get; set; }
+        public virtual Company? Company { get; set; }
     }
 }

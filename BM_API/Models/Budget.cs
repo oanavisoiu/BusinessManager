@@ -19,5 +19,6 @@ namespace BM_API.Models
         public string BudgetTypeName { get; set; }
         [Required]
         public Guid CompanyId { get; set; }
+        public virtual Company? Company { get; set; }
     }
 }

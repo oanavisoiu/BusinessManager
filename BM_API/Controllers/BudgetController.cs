@@ -85,7 +85,7 @@ namespace BM_API.Controllers
             }
         }
         [HttpGet("get-budgets-by-company-id/{id}")]
-        public async Task<IActionResult> GetBudgetByCompanyId([FromRoute] Guid id)
+        public async Task<IActionResult> GetBudgetsByCompanyId([FromRoute] Guid id)
         {
             try
             {
