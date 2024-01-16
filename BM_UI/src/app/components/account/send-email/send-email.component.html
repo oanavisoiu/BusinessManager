@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-center align-items-center my-2" *ngIf="mode">
+<div class="page d-flex justify-content-center align-items-center my-2" *ngIf="mode">
   <div class="register-form border rounded">
     <div class="d-flex justify-content-center align-items-center p-3">
       <div>
@@ -19,8 +19,8 @@
               <app-validation-messages [errorMessages]="errorMessages"></app-validation-messages>
             </div>
           </div>
-          <button class="btn btn-primary me-3" type="submit">Send email</button>
-          <button class="btn btn-secondary" type="button" (click)="cancel()">Cancel</button>
+          <button class="btn send me-3" type="submit">Send email</button>
+          <button class="btn back" type="button" (click)="cancel()">Cancel</button>
         </form>
       </div>
     </div>

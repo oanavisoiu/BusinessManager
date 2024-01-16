@@ -12,7 +12,7 @@
 }
 .dx-drawer-content{
   overflow-x: visible;
-  min-height: 664px;
+  min-height: 660px;
 }
 .dx-drawer{
   background-color: #ebebeb;
@@ -27,3 +27,6 @@
   height: fit-content;
 }
 
+.flex-grow-1 {
+flex-grow: 60;
+}

@@ -1,32 +1,38 @@
 <div *ngIf="(accountService.user$ | async) as user">
   <dx-drawer [openedStateMode]="'shrink'" [position]="'left'" [revealMode]="'slide'" template="template"
     [(opened)]="isDrawerOpen" [closeOnOutsideClick]="false">
-  <div style="height: 50px; background-color: white;">
-    <dx-toolbar>
-      <dxi-item location="before" template="list">
-        <div *dxTemplate="let data of 'list'">
-          <div>
-            <i class=' bi bi-list' style='font-size:30px;' (click)="onOpenDrawer()"></i>
-          </div>
+    <dx-toolbar style="height: 40px; min-width: fit-content;">
+      <dxi-item location="before" widget="dxButton">
+        <div *dxTemplate>
+          <i class='bi bi-list mt-auto mb-auto ms-3' style="font-size: 20px;" s (click)="onOpenDrawer()"></i>
         </div>
       </dxi-item>
 
-      <dxi-item location="after" template="title">
-        <div *dxTemplate="let data of 'title'">
-          <div style="margin-top:auto; margin-bottom: auto;">
-            <p style=' font-style: italic; font-size:20px;'>BusinessManager</p>
+      <dxi-item *ngIf="(companyService.company$ | async) as company" location="center">
+        <div *dxTemplate>
+          <p class="my-auto" style=' font-weight: bold; font-size: 17px;'>{{company.name}}</p>
+        </div>
+      </dxi-item>
+
+      <dxi-item location="after">
+        <div *dxTemplate>
+          <div style="display: flex; flex-direction: row; ">
+            <p class="my-auto mx-1" style="font-size: 16px; font-style: italic;">{{user.firstName}} {{user.lastName}}
+            </p>
+            <i class="bi bi-person-fill my-auto me-3" style="font-size: 20px;"></i>
           </div>
         </div>
       </dxi-item>
     </dx-toolbar>
-  </div>
 
 
     <div class="dx-drawer-content">
       <div *dxTemplate="let data of 'template'"
         style="width: 200px; min-height: 700px; height: 100vh; background-color: #CCD5AE;">
-        <div style="display: flex; flex-direction: column;">
-          <app-logged-user></app-logged-user>
+        <div style="width: 200px; min-height: 700px; height: 100vh; display: flex; flex-direction: column; justify-content: space-between;">
+
+          <p class="my-4 mx-auto" style="font-size: 20px; font-style: italic;">BusinessManager</p>
+
           <button class="btn mt-1 py-2 menu-item" routerLink="/" #rlaH="routerLinkActive" routerLinkActive="active-link"
             [routerLinkActiveOptions]="{ exact: true }">
             <div class="button-content">
@@ -63,6 +69,14 @@
             <div class="button-content">
               <div class=""><i class="bi bi-check-square-fill"></i> To Do</div>
               <div class="" *ngIf="rlaToDo.isActive"><i class="bi bi-arrow-right"></i></div>
+            </div>
+          </button>
+          <div class="flex-grow-1"></div>
+
+          <!-- Logout Button -->
+          <button class="btn mt-1 py-2 menu-item" (click)="onLogout()">
+            <div class="button-content">
+              <div class=""><i class="bi bi-box-arrow-right"></i> Log out</div>
             </div>
           </button>
 

@@ -1,6 +1,17 @@
-.password{
-  font-size: smaller;
+.page{
+  background-color: #f8f9fa;
 }
 .register-form{
   min-height: 98vh;
+  color: #4D4D4D;
+  background-color: white;
+}
+.password{
+  font-size: smaller;
+}
+.register{
+  background-color: #96AD49;
+}
+.back{
+  background-color: #E9EDC9;
 }

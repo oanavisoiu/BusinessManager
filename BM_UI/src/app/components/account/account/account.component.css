@@ -1,4 +1,11 @@
 .account{
   min-height: 100vh;
-  background-color: rgb(235, 213, 223);
+  background-color: #f8f9fa;
+  color: #4D4D4D;
+}
+.register{
+  background-color: #96AD49;
+}
+.login{
+  background-color: #E9EDC9;
 }

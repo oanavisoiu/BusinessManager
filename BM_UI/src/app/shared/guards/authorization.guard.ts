@@ -23,7 +23,7 @@ export class AuthorizationGuard{
         }
         else{
            this.sharedService.showNotification(false,'Restricted access', 'You have to login to access this page.');
-           this.router.navigate(['/'], {queryParams: {returnUrl:state.url}});
+           this.router.navigate(['/account'], {queryParams: {returnUrl:state.url}});
           return false;
         }
       }

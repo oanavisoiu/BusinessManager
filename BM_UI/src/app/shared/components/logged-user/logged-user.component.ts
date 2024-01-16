@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/components/account/account.service';
-import { CompanyService } from 'src/app/components/company/company.service';
 
 @Component({
   selector: 'app-logged-user',
@@ -9,12 +8,8 @@ import { CompanyService } from 'src/app/components/company/company.service';
 })
 export class LoggedUserComponent implements OnInit {
 
-  constructor(public accountService:AccountService, public companyService:CompanyService) {}
+  constructor(public accountService:AccountService) {}
 
   ngOnInit(): void {}
 
-  logout()
-  {
-    this.accountService.logout();
-  }
 }
