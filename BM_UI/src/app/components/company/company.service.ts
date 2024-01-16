@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { BehaviorSubject, map } from 'rxjs';
 import { Company } from 'src/app/shared/models/company/company.model';
 import { environment } from 'src/environments/environment';

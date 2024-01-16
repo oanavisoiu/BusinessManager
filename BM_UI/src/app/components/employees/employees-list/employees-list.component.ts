@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CompanyService } from '../../company/company.service';
 import { Employee } from 'src/app/shared/models/employee/employee.model';
 import CustomStore from 'devextreme/data/custom_store';
-import { catchError, from, of } from 'rxjs';
+import { catchError, of } from 'rxjs';
 import { CompanyEmployee } from 'src/app/shared/models/employee/company-employee.model';
 import { exportDataGrid } from 'devextreme/pdf_exporter';
 import jsPDF from 'jspdf';

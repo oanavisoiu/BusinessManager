@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EmployeesListComponent } from './components/employees/employees-list/employees-list.component';
 import { NotFoundComponent } from './shared/components/errors/not-found/not-found.component';
 import { AuthorizationGuard } from './shared/guards/authorization.guard';
-import { LoginComponent } from './components/account/login/login.component';
 
 const routes: Routes = [
   {

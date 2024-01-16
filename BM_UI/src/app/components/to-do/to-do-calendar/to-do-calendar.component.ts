@@ -1,10 +1,9 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CompanyService } from '../../company/company.service';
 import { ToDoService } from '../to-do.service';
 import CustomStore from 'devextreme/data/custom_store';
 import { catchError, of } from 'rxjs';
 import { ToDo } from 'src/app/shared/models/to-do/to-do.model';
-import { ToDoView } from 'src/app/shared/models/to-do/to-do-view.model';
 
 @Component({
   selector: 'app-to-do-calendar',

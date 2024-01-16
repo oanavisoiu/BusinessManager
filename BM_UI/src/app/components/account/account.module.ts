@@ -7,7 +7,8 @@ import { AccountComponent } from './account/account.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { SendEmailComponent } from './send-email/send-email.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { DevextremeModule } from 'src/app/shared/materials/devextreme/devextreme.module';
+import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,13 +16,14 @@ import { DevextremeModule } from 'src/app/shared/materials/devextreme/devextreme
     RegisterComponent,
     AccountComponent,
     SendEmailComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ConfirmEmailComponent
   ],
   imports: [
     CommonModule,
     AccountRoutingModule,
     SharedModule,
-    DevextremeModule
+    ReactiveFormsModule
   ]
 })
 export class AccountModule { }

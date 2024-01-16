@@ -9,8 +9,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationComponent } from './components/modals/notification/notification.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoggedUserComponent } from './components/logged-user/logged-user.component';
-import { DevextremeModule } from './materials/devextreme/devextreme.module';
 import { CompanyNotSetComponent } from './components/company-not-set/company-not-set.component';
+import { DxButtonModule, DxChartModule, DxDataGridModule, DxDrawerModule, DxLookupModule, DxNumberBoxModule, DxSchedulerModule, DxToolbarModule } from 'devextreme-angular';
 
 
 
@@ -26,20 +26,24 @@ import { CompanyNotSetComponent } from './components/company-not-set/company-not
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule,
     HttpClientModule,
     NgbModalModule,
-    DevextremeModule
+    DxDrawerModule,
+    DxToolbarModule,
+    RouterModule
   ],
   exports: [
-    ReactiveFormsModule,
-    RouterModule,
-    HttpClientModule,
     ValidationMessagesComponent,
-    NgbModalModule,
     NavbarComponent,
     LoggedUserComponent,
-    CompanyNotSetComponent
+    CompanyNotSetComponent,
+    RouterModule,
+    DxDataGridModule,
+    DxChartModule,
+    DxLookupModule,
+    DxNumberBoxModule,
+    DxSchedulerModule,
+    DxButtonModule
   ]
 })
 export class SharedModule { }

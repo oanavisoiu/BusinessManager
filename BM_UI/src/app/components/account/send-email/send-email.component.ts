@@ -1,6 +1,5 @@
 import { SharedService } from './../../../shared/shared.service';
 import { Component, OnInit } from '@angular/core';
-import { AccountComponent } from '../account/account.component';
 import { AccountService } from '../account.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';

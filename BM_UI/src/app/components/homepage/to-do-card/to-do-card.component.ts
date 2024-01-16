@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee } from 'src/app/shared/models/employee/employee.model';
 import { ToDoView } from 'src/app/shared/models/to-do/to-do-view.model';
 import { CompanyService } from '../../company/company.service';
 import { Company } from 'src/app/shared/models/company/company.model';

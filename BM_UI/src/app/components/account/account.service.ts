@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { ReplaySubject, map, take } from 'rxjs';
+import { ReplaySubject, map } from 'rxjs';
 import { ConfirmEmail } from 'src/app/shared/models/account/confirm-email.model';
 import { Login } from 'src/app/shared/models/account/login.model';
 import { Register } from 'src/app/shared/models/account/register.model';

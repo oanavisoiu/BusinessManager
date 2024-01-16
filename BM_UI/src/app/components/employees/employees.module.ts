@@ -4,18 +4,19 @@ import { EmployeesListComponent } from './employees-list/employees-list.componen
 import { SharedModule } from 'src/app/shared/shared.module';
 import { EmployeesRoutingModule } from './employees-routing.module';
 import { FormsModule } from '@angular/forms';
-import { DevextremeModule } from 'src/app/shared/materials/devextreme/devextreme.module';
+import { DevExtremeModule, DxDataGridComponent } from 'devextreme-angular';
 
 @NgModule({
   declarations: [
     EmployeesListComponent,
+
   ],
   imports: [
     CommonModule,
     SharedModule,
     EmployeesRoutingModule,
     FormsModule,
-    DevextremeModule
-  ]
+
+  ],
 })
 export class EmployeesModule { }

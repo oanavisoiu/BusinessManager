@@ -1,8 +1,6 @@
-import { Company } from 'src/app/shared/models/company/company.model';
 import { Component, OnInit } from '@angular/core';
 import { CompanyService } from '../../company/company.service';
 import { BudgetService } from '../budget.service';
-import { take } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { DayBudget } from 'src/app/shared/models/budget/day-budget.model';
 

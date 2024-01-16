@@ -3,9 +3,8 @@ import { CompanyService } from 'src/app/components/company/company.service';
 import { CompanySupplier } from 'src/app/shared/models/supplier/company-supplier.model';
 import { SupplierService } from '../../supplier.service';
 import CustomStore from 'devextreme/data/custom_store';
-import { catchError, from, of } from 'rxjs';
+import { catchError, of } from 'rxjs';
 import { Supplier } from 'src/app/shared/models/supplier/supplier.model';
-import { SupplierUpdate } from 'src/app/shared/models/supplier/supplier-update.model';
 import jsPDF from 'jspdf';
 import { exportDataGrid } from 'devextreme/pdf_exporter';
 
