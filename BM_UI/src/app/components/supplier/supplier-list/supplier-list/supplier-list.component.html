@@ -1,19 +1,20 @@
-<div class="container">
+<div class="container mt-3">
   <div class="card">
     <div class="card-header">
       <h3 class="card-title">Suppliers</h3>
     </div>
     <div class="card-body">
       <div class="table-responsive">
-        <dx-tree-list *ngIf="(companyService.company$ | async)" id="suppliers" [keyExpr]="'id'" [dataSource]="suppliers" [columnAutoWidth]="true"
-          [wordWrapEnabled]="true" [showBorders]="true">
+        <dx-data-grid *ngIf="(companyService.company$ | async)" id="suppliers" [keyExpr]="'id'" [dataSource]="suppliers" [columnAutoWidth]="true"
+          [wordWrapEnabled]="true" [showBorders]="true" (onExporting)="onExporting($event)">
           <dxo-search-panel [visible]="true" width="250"></dxo-search-panel>
           <dxo-header-filter [visible]="true"></dxo-header-filter>
           <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
 
           <dxo-scrolling mode="standard"></dxo-scrolling>
-          <dxo-paging [enabled]="true" [pageSize]="10"> </dxo-paging>
-          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true">
+          <dxo-paging [enabled]="true" [pageSize]="5"></dxo-paging>
+          <dxo-pager [visible]="true" [displayMode]="'full'" [showPageSizeSelector]="true"
+            [showInfo]="true" [showNavigationButtons]="true">
           </dxo-pager>
 
           <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true">
@@ -44,7 +45,8 @@
             <dxi-button name="edit" icon="bi bi-pencil-square"></dxi-button>
             <dxi-button name="delete" icon="bi bi-trash"></dxi-button>
           </dxi-column>
-        </dx-tree-list>
+          <dxo-export [enabled]="true" [formats]="['pdf']" [allowExportSelectedData]="true"></dxo-export>
+        </dx-data-grid>
         <div *ngIf="!(companyService.company$ | async)">
             <app-company-not-set></app-company-not-set>
         </div>

@@ -1,17 +1,32 @@
-<div style="display: flex; align-items: center; justify-content: space-between; background-color: rgb(243, 229, 234);"
-  *ngIf="(accountService.user$ | async) as user">
-  <dx-toolbar [items]="toolbarContent" style="background-color: rgb(243, 229, 234);"></dx-toolbar>
-  <app-logged-user></app-logged-user>
-</div>
-
 <div *ngIf="(accountService.user$ | async) as user">
   <dx-drawer [openedStateMode]="'shrink'" [position]="'left'" [revealMode]="'slide'" template="template"
-    [(opened)]="isDrawerOpen" [closeOnOutsideClick]="false" style="background-color: rgb(249, 244, 246);">
+    [(opened)]="isDrawerOpen" [closeOnOutsideClick]="false">
+  <div style="height: 50px; background-color: white;">
+    <dx-toolbar>
+      <dxi-item location="before" template="list">
+        <div *dxTemplate="let data of 'list'">
+          <div>
+            <i class=' bi bi-list' style='font-size:30px;' (click)="onOpenDrawer()"></i>
+          </div>
+        </div>
+      </dxi-item>
+
+      <dxi-item location="after" template="title">
+        <div *dxTemplate="let data of 'title'">
+          <div style="margin-top:auto; margin-bottom: auto;">
+            <p style=' font-style: italic; font-size:20px;'>BusinessManager</p>
+          </div>
+        </div>
+      </dxi-item>
+    </dx-toolbar>
+  </div>
+
+
     <div class="dx-drawer-content">
       <div *dxTemplate="let data of 'template'"
-        style="width: 200px; height:100vh; background-color: rgb(235, 213, 223);">
-
+        style="width: 200px; min-height: 700px; height: 100vh; background-color: #CCD5AE;">
         <div style="display: flex; flex-direction: column;">
+          <app-logged-user></app-logged-user>
           <button class="btn mt-1 py-2 menu-item" routerLink="/" #rlaH="routerLinkActive" routerLinkActive="active-link"
             [routerLinkActiveOptions]="{ exact: true }">
             <div class="button-content">
@@ -23,7 +38,7 @@
             routerLinkActive="active-link">
             <div class="button-content">
               <div class=""><i class="bi bi-people-fill"></i> Employees</div>
-            <div class="" *ngIf="rlaEmp.isActive"><i class="bi bi-arrow-right"></i></div>
+              <div class="" *ngIf="rlaEmp.isActive"><i class="bi bi-arrow-right"></i></div>
             </div>
 
           </button>
@@ -31,7 +46,7 @@
             routerLinkActive="active-link">
             <div class="button-content">
               <div class=""><i class="bi bi-truck-flatbed"></i> Suppliers</div>
-            <div class="" *ngIf="rlaSup.isActive"><i class="bi bi-arrow-right"></i></div>
+              <div class="" *ngIf="rlaSup.isActive"><i class="bi bi-arrow-right"></i></div>
             </div>
 
           </button>
@@ -39,7 +54,7 @@
             routerLinkActive="active-link">
             <div class="button-content">
               <div class=""><i class="bi bi-credit-card-fill"></i> Budget</div>
-            <div class="" *ngIf="rlaBud.isActive"><i class="bi bi-arrow-right"></i></div>
+              <div class="" *ngIf="rlaBud.isActive"><i class="bi bi-arrow-right"></i></div>
             </div>
           </button>
 
@@ -47,7 +62,7 @@
             routerLinkActive="active-link">
             <div class="button-content">
               <div class=""><i class="bi bi-check-square-fill"></i> To Do</div>
-            <div class="" *ngIf="rlaToDo.isActive"><i class="bi bi-arrow-right"></i></div>
+              <div class="" *ngIf="rlaToDo.isActive"><i class="bi bi-arrow-right"></i></div>
             </div>
           </button>
 

@@ -6,6 +6,8 @@ import CustomStore from 'devextreme/data/custom_store';
 import { catchError, from, of } from 'rxjs';
 import { Supplier } from 'src/app/shared/models/supplier/supplier.model';
 import { SupplierUpdate } from 'src/app/shared/models/supplier/supplier-update.model';
+import jsPDF from 'jspdf';
+import { exportDataGrid } from 'devextreme/pdf_exporter';
 
 @Component({
   selector: 'app-supplier-list',
@@ -106,5 +108,13 @@ export class SupplierListComponent implements OnInit {
       }
     );
   }
-
+  onExporting(e:any) {
+    const doc = new jsPDF();
+    exportDataGrid({
+      jsPDFDocument: doc,
+      component: e.component,
+    }).then(() => {
+      doc.save('Suppliers.pdf');
+    });
+  }
 }

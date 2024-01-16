@@ -2,7 +2,7 @@
   color: red;
 }
 .income{
-  color: green;
+  color: #769902;
 }
 .date{
   font-weight: bold;
@@ -10,5 +10,5 @@
 }
 .card{
   min-height: 150px;
-
+  background-color: #E9EDC9;
 }

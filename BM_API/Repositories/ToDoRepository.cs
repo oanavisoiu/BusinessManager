@@ -26,8 +26,16 @@ namespace BM_API.Repositories
             var day = today.Day;
             var month = today.Month;
             var year = today.Year;
+
             ICollection<ToDo> toDos = await GetToDosByCompanyIdAsync(companyId);
-            return toDos.Where(x => (x.StartDate <= today && x.EndDate >= today)||(x.StartDate.Day==day && x.StartDate.Month==month && x.StartDate.Year==year)||(x.EndDate.Day == day && x.EndDate.Month == month && x.EndDate.Year == year)).ToList();
+
+            return toDos.Where(x =>
+                (x.StartDate.Date <= today.Date && x.EndDate.Date >= today.Date) ||
+
+                (x.StartDate.Day == day && x.StartDate.Month == month && x.StartDate.Year == year) ||
+
+                (x.EndDate.Day == day && x.EndDate.Month == month && x.EndDate.Year == year)
+            ).ToList();
         }
         public async Task<ICollection<ToDo>> GetUpcomingToDosAsync(Guid companyId)
         {

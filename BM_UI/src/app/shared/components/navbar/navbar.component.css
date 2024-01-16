@@ -1,22 +1,29 @@
 .menu-item:hover{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: rgb(242, 239, 240);
+  background-color: #FEFAE0;
 }
 .menu-item:disabled{
   border: 0;
 }
-.dx-drawer-content{
-  overflow-x: visible;
-  height: 99.9vh;
-}
 .active-link {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: rgb(242, 239, 240);
+  background-color: #FEFAE0;
   font-weight: bold;
 }
+.dx-drawer-content{
+  overflow-x: visible;
+  min-height: 664px;
+}
+.dx-drawer{
+  background-color: #ebebeb;
+}
+
 .button-content{
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.dx-toolbar-items-container  {
+  height: fit-content;
 }
 

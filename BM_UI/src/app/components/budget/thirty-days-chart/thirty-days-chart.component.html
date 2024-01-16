@@ -1,7 +1,10 @@
-<dx-chart [dataSource]="dataSource">
-  <dxi-series argumentField="date" valueField="income" name="Income" type="line"></dxi-series>
-  <dxi-series argumentField="date" valueField="expense" name="Expenses" type="line"></dxi-series>
-  <dxo-tooltip [enabled]="true">
+
+<div class="chart">
+  <dx-chart [dataSource]="dataSource">
+  <dxi-series class="income" argumentField="date" valueField="income" name="Income" type="line" color="#769902"></dxi-series>
+  <dxi-series class="expense" argumentField="date" valueField="expense" name="Expenses" type="line" color="#747567"></dxi-series>
+  <dxo-tooltip [enabled]="true" color="#E9EDC9">
+
   </dxo-tooltip>
-  <!-- Configure other chart settings as needed -->
 </dx-chart>
+</div>

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-3">
   <div class="card">
     <div class="card-header">
       <h3 class="card-title">Budget</h3>
@@ -12,8 +12,9 @@
           <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
           <dxo-scrolling mode="standard"></dxo-scrolling>
 
-          <dxo-paging [enabled]="true" [pageSize]="10"> </dxo-paging>
-          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true">
+          <dxo-paging [enabled]="true" [pageSize]="5"></dxo-paging>
+          <dxo-pager [visible]="true" [displayMode]="'full'" [showPageSizeSelector]="true"
+            [showInfo]="true" [showNavigationButtons]="true">
           </dxo-pager>
 
           <dxo-editing mode="popup" title="Budget info" [allowAdding]="true" [allowDeleting]="true">

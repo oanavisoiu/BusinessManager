@@ -1,31 +1,7 @@
-/* .button-content {
-  display: inline;
-}
-.logged-user{
-  display: inline;
-}
-.name-container {
-  display: flex;
-  flex-direction: column;
-  width: 150px;
-}
-
-.profile-name {
-  margin-bottom: 2px;
-  font-size: 14px;
-}
-.business-name{
-  font-size: 12px;
-  color: dimgray;
-} */
-
 .logged-user {
   border-radius: 4px;
   padding: 8px 16px;
   cursor: pointer;
-}
-
-.logged-user:hover {
 }
 
 .name-container {
@@ -37,24 +13,22 @@
 .user-info {
   margin-top: auto;
   margin-bottom: auto;
+  width: 200px;
 }
 
 .profile-name {
   font-size: 14px;
   font-weight: bold;
   white-space: nowrap;
-  text-align: end;
+  text-align: center;
+  color: #4D4D4D;
 }
 
 .business-name {
   font-size: 12px;
   font-style: italic;
-  color: #888888;
-  text-align: end;
-}
-
-.bi-person-fill {
-  font-size: 40px;
+  color: #4D4D4D;
+  text-align: center;
 }
 
 .dropdown-menu {
@@ -68,10 +42,6 @@
   text-decoration: none;
   display: block;
 }
-
-.dropdown-item:hover {
-}
-
 
 
 

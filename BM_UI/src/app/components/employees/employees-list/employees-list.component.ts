@@ -1,13 +1,12 @@
 import { EmployeesService } from '../employees.service';
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyService } from '../../company/company.service';
-import { Router } from '@angular/router';
 import { Employee } from 'src/app/shared/models/employee/employee.model';
 import CustomStore from 'devextreme/data/custom_store';
 import { catchError, from, of } from 'rxjs';
-import { EmployeeUpdate } from 'src/app/shared/models/employee/employee-update.model';
 import { CompanyEmployee } from 'src/app/shared/models/employee/company-employee.model';
+import { exportDataGrid } from 'devextreme/pdf_exporter';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-employees-list',
@@ -115,4 +114,14 @@ export class EmployeesListComponent implements OnInit {
       }
     );
   }
+  onExporting(e:any) {
+    const doc = new jsPDF();
+    exportDataGrid({
+      jsPDFDocument: doc,
+      component: e.component,
+    }).then(() => {
+      doc.save('Employees.pdf');
+    });
+  }
+
 }
