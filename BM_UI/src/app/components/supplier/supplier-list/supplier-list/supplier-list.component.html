@@ -1,9 +1,8 @@
 <div class="container mt-3">
   <div class="card">
-    <div class="card-header">
-      <h3 class="card-title">Suppliers</h3>
-    </div>
     <div class="card-body">
+      <h4>Suppliers</h4>
+      <hr class="solid">
       <div class="table-responsive">
         <dx-data-grid *ngIf="(companyService.company$ | async)" id="suppliers" [keyExpr]="'id'" [dataSource]="suppliers" [columnAutoWidth]="true"
           [wordWrapEnabled]="true" [showBorders]="true" (onExporting)="onExporting($event)">
@@ -21,7 +20,7 @@
             <dxo-popup title="Suppliers Info" [showTitle]="true" [width]="700"></dxo-popup>
           </dxo-editing>
           <dxi-column dataField="name" caption="Name">
-
+            <dxi-validation-rule type="required"></dxi-validation-rule>
           </dxi-column>
           <dxi-column dataField="address" caption="Address">
 

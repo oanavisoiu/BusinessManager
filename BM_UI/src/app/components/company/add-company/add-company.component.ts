@@ -27,12 +27,16 @@ export class AddCompanyComponent implements OnInit {
 
   addCompany(){
     this.companyService.addCompany(this.company)?.subscribe({
+
       next:(tmpCompany)=>{
+        console.log(this.company);
         this.modalService.dismissAll();
         this.router.navigate(['']);
       },
-      error:(err)=>
-      console.log(err)
+      error:(err)=>{
+        console.log(this.company);
+        console.log(err);
+      }
     });
     this.accountService.user$.subscribe({
       next:(user:User|null)=>{}
@@ -42,5 +46,11 @@ export class AddCompanyComponent implements OnInit {
     this.modalService.dismissAll();
     this.router.navigate(['']);
   }
+
+  saveButtonOptions = {
+    text: 'Save',
+    width: '120px',
+    useSubmitBehavior: true,
+  };
 
 }

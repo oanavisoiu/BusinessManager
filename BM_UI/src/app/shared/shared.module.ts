@@ -10,7 +10,7 @@ import { NotificationComponent } from './components/modals/notification/notifica
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoggedUserComponent } from './components/logged-user/logged-user.component';
 import { CompanyNotSetComponent } from './components/company-not-set/company-not-set.component';
-import { DxButtonModule, DxChartModule, DxDataGridModule, DxDrawerModule, DxLookupModule, DxNumberBoxModule, DxSchedulerModule, DxToolbarModule } from 'devextreme-angular';
+import { DxButtonModule, DxChartModule, DxDataGridModule, DxDateBoxModule, DxDrawerModule, DxFormModule, DxLookupModule, DxNumberBoxModule, DxSchedulerModule, DxToolbarModule } from 'devextreme-angular';
 
 
 
@@ -43,7 +43,9 @@ import { DxButtonModule, DxChartModule, DxDataGridModule, DxDrawerModule, DxLook
     DxLookupModule,
     DxNumberBoxModule,
     DxSchedulerModule,
-    DxButtonModule
+    DxButtonModule,
+    DxFormModule,
+    DxDateBoxModule
   ]
 })
 export class SharedModule { }

@@ -1,7 +1,7 @@
 <div *ngIf="(accountService.user$ | async) as user">
   <dx-drawer [openedStateMode]="'shrink'" [position]="'left'" [revealMode]="'slide'" template="template"
     [(opened)]="isDrawerOpen" [closeOnOutsideClick]="false">
-    <dx-toolbar style="height: 40px; min-width: fit-content;">
+    <dx-toolbar style="height: 40px; min-width: fit-content; ">
       <dxi-item location="before" widget="dxButton">
         <div *dxTemplate>
           <i class='bi bi-list mt-auto mb-auto ms-3' style="font-size: 20px;" s (click)="onOpenDrawer()"></i>
@@ -29,7 +29,7 @@
     <div class="dx-drawer-content">
       <div *dxTemplate="let data of 'template'"
         style="width: 200px; min-height: 700px; height: 100vh; background-color: #CCD5AE;">
-        <div style="width: 200px; min-height: 700px; height: 100vh; display: flex; flex-direction: column; justify-content: space-between;">
+        <div style="width: 200px; min-height: 700px; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
 
           <p class="my-4 mx-auto" style="font-size: 20px; font-style: italic;">BusinessManager</p>
 

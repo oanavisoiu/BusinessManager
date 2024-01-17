@@ -1,3 +1,6 @@
 .page{
-  min-height: 90vh;
+  height: 100vh;
+}
+.btn{
+  background-color: #96AD49;
 }

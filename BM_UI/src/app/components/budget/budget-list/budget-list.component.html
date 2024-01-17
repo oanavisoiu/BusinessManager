@@ -1,9 +1,8 @@
 <div class="container mt-3">
   <div class="card">
-    <div class="card-header">
-      <h3 class="card-title">Budget</h3>
-    </div>
     <div class="card-body">
+      <h4>Budgets</h4>
+      <hr class="solid">
       <div class="table-responsive">
         <dx-data-grid *ngIf="(companyService.company$ | async)" id="budgets" [dataSource]="budgets" [columnAutoWidth]="true" [wordWrapEnabled]="true"
           [showBorders]="true" (onExporting)="onExporting($event)">
@@ -31,7 +30,10 @@
               <dxi-item dataField="name" >
               </dxi-item>
 
-              <dxi-item dataField="date" caption="Date" editorType="dxDateBox">
+              <dxi-item dataField="date" template="dateTemplate" caption="Date" editorType="dxDateBox" >
+                <div *dxTemplate="let data of 'dateTemplate'">
+                  <dx-date-box [(value)]="formData.date" (onValueChanged)="changeBudgetDate($event)"></dx-date-box>
+                </div>
               </dxi-item>
 
               <dxi-item dataField="createdDate" caption="Created Date" editorType="dxDateBox"

@@ -1,6 +1,8 @@
 <div class="container mt-3">
   <div class="card">
     <div class="card-body">
+      <h4>Employees</h4>
+      <hr class="solid">
       <div class="table-responsive">
         <dx-data-grid *ngIf="(companyService.company$ | async)" id="employees" [keyExpr]="'id'" [dataSource]="employees"
           [columnAutoWidth]="true" [wordWrapEnabled]="true" [showBorders]="true" (onExporting)="onExporting($event)">
@@ -48,8 +50,8 @@
             <dxi-validation-rule type="required"></dxi-validation-rule>
           </dxi-column>
           <dxi-column dataField="endDate" caption="End Date" dataType="date">
-            <dxi-validation-rule type="range" [min]="minDate"
-              message="End date can't be before today's date. "></dxi-validation-rule>
+            <!-- <dxi-validation-rule type="range" [min]="minDate"
+              message="End date can't be before today's date. "></dxi-validation-rule> -->
           </dxi-column>
           <dxi-column dataField="department" caption="Department">
             <dxi-validation-rule type="required"></dxi-validation-rule>

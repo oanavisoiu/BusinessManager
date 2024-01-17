@@ -1,9 +1,8 @@
 <div class="container mt-3">
   <div class="card">
-    <div class="card-header">
-      <h3 class="card-title">Schedule</h3>
-    </div>
     <div class="card-body">
+      <h4>Schedule</h4>
+      <hr class="solid">
       <dx-scheduler class="custom-scheduler-size" *ngIf="(companyService.company$ | async)" timeZone="Europe/Bucharest" [views]="['day', 'week', 'workWeek', 'month']" [dataSource]="toDos"
         currentView="month" [currentDate]="currentDate" [firstDayOfWeek]="1" [startDayHour]="00" [endDayHour]="23"
         [showAllDayPanel]="false" [height]="500">

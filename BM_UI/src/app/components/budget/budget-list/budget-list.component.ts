@@ -3,10 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { BudgetService } from '../budget.service';
 import { CompanyService } from '../../company/company.service';
 import CustomStore from 'devextreme/data/custom_store';
-import { catchError, of } from 'rxjs';
+import { catchError, of, switchMap, take } from 'rxjs';
 import { exportDataGrid } from 'devextreme/pdf_exporter';
 import jsPDF from 'jspdf';
 import { EmployeesService } from '../../employees/employees.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-budget-list',
@@ -22,11 +23,13 @@ export class BudgetListComponent implements OnInit {
   todayDate: any;
   formData:any;
   sumOfSalaries=0;
+  currentDate=new Date();
 
   constructor(
     private budgetService: BudgetService,
     public companyService: CompanyService,
-    private employeesService:EmployeesService){}
+    private employeesService:EmployeesService,
+    private datePipe: DatePipe){}
 
   ngOnInit(): void {
     this.initializeForm();
@@ -44,6 +47,10 @@ export class BudgetListComponent implements OnInit {
       value:0,
       paymentType:''
     };
+  }
+  formatDate(date:any):any{
+    date = this.datePipe.transform(new Date(date), 'yyyy-MM-dd');
+    return date;
   }
   getBudgetTypeNames(){
     this.budgetService.getBudgetTypeNames().subscribe({
@@ -67,12 +74,34 @@ export class BudgetListComponent implements OnInit {
       this.formData.paymentType='Expense';
     }
   }
+  changeBudgetDate(event: any) {
+    if (event.value) {
+        this.formData.date = this.formatDate(event.value);
+        this.companyService.company$.pipe(
+            switchMap(company => {
+                if (company) {
+                    return this.employeesService.getSumOfSalaries(company.id, this.formData.date);
+                } else {
+                    return of(0);
+                }
+            })
+        ).subscribe(sum => {
+            this.sumOfSalaries = sum;
+            if (this.isBudgetTypeNameSalaries) {
+                this.formData = { ...this.formData, value: this.sumOfSalaries };
+            }
+        });
+    }
+}
   operations() {
     this.companyService.company$.subscribe((company) => {
       if (company) {
-        this.employeesService.getSumOfSalaries(company.id).subscribe({
+        this.currentDate=this.formatDate(this.currentDate);
+        console.log(this.currentDate);
+        this.employeesService.getSumOfSalaries(company.id,this.currentDate).subscribe({
           next:(sum)=>{
             this.sumOfSalaries=sum;
+            console.log(this.sumOfSalaries);
           }
         })
         const dataService = this.budgetService;

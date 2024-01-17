@@ -52,7 +52,7 @@ namespace BM_API.Controllers
                 if (budgetAdd.BudgetTypeName == "Salaries")
                 {
                     budgetAdd.PaymentTypeName = "Expense";
-                    budgetAdd.Value = -await _companyEmployeeRepository.GetSumOfSalariesAsync(budget.CompanyId);
+                    budgetAdd.Value = -await _companyEmployeeRepository.GetSumOfSalariesAsync(budget.CompanyId, budgetAdd.Date);
                 }
                 else if (budgetAdd.BudgetTypeName == "Other")
                 {

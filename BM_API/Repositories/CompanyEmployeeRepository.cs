@@ -27,14 +27,25 @@ namespace BM_API.Repositories
 
             return employees;
         }
-        public async Task<decimal> GetSumOfSalariesAsync(Guid companyId)
+        public async Task<ICollection<Employee>> GetEmployeesWithEndDateAfterDateAsync(Guid companyId, DateTime date)
+        {
+            var companyEmployees = await GetEmployeesByCompanyAsync(companyId);
+            var employees = companyEmployees
+                .Join(
+                _bmDbContext.Employees,
+                ce => ce.EmployeeId,
+                e => e.Id,
+                (ce, e) => e)
+                .Where(e => e.EndDate==null || e.EndDate>=date);
+            return employees.ToList();
+        }
+        public async Task<decimal> GetSumOfSalariesAsync(Guid companyId, DateTime date)
         {
             decimal sum = 0;
-            var companyEmployees = await GetEmployeesByCompanyAsync(companyId);
+            var employees = await GetEmployeesWithEndDateAfterDateAsync(companyId,date);
 
-            foreach (var companyEmployee in companyEmployees)
+            foreach (var employee in employees)
             {
-                var employee = await _employeeRepository.GetEmployeeByIdAsync(companyEmployee.EmployeeId);
                 sum += employee.Salary;
             }
 
@@ -52,9 +63,16 @@ namespace BM_API.Repositories
                 ce => ce.EmployeeId,
                 e => e.Id,
                 (ce,e)=>e)
-                .Where(e=>(e.BirthDate.Day>=startDate.Day&&e.BirthDate.Month==startDate.Month)||
+                .Where(e=>((e.BirthDate.Day>=startDate.Day&&e.BirthDate.Month==startDate.Month)||
                 (e.BirthDate.Day<=endDate.Day&&e.BirthDate.Month==endDate.Month)||
-                (e.BirthDate.Month>startDate.Month&&e.BirthDate.Month<endDate.Month));
+                (e.BirthDate.Month>startDate.Month&&e.BirthDate.Month<endDate.Month))&&
+                (e.EndDate>startDate)&&
+                (
+                    ((e.BirthDate.Month==e.EndDate.GetValueOrDefault().Month)&&
+                    (e.BirthDate.Day<e.EndDate.Value.Day))||
+                    (e.BirthDate.Month<e.EndDate.Value.Month)
+                 )
+                 );
             return employees.ToList();
         }
     

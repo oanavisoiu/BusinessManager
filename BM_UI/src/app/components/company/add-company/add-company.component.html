@@ -1,4 +1,4 @@
-<div class="modal-header">
+<!-- <div class="modal-header">
   <h5 class="modal-title">Add company</h5>
   <button type="button" class="btn-close" (click)="onButtonClose()"></button>
 </div>
@@ -19,5 +19,27 @@
       </div>
     </div>
     <button class="btn btn-primary" type="submit">Save</button>
+  </form>
+</div> -->
+
+<div class="modal-header">
+  <h5 class="modal-title">Company Info</h5>
+  <button type="button" class="btn-close" (click)="onButtonClose()"></button>
+</div>
+<div class="modal-body">
+  <form #form="ngForm" (submit)="addCompany()">
+    <dx-form [(formData)]="company">
+      <dxi-item dataField="name" editorType="dxTextBox" [editorOptions]="{ placeholder: 'Name' }">
+        <dxi-validation-rule type="required">
+
+        </dxi-validation-rule>
+      </dxi-item>
+      <dxi-item dataField="address" editorType="dxTextBox" [editorOptions]="{ placeholder: 'Address' }">
+      </dxi-item>
+      <dxi-item dataField="phoneNumber" editorType="dxTextBox" [editorOptions]="{ placeholder: 'Phone Number' }">
+      </dxi-item>
+      <dxi-item class="save" itemType="button" [buttonOptions]="saveButtonOptions">
+      </dxi-item>
+    </dx-form>
   </form>
 </div>

@@ -127,8 +127,8 @@ namespace BM_API.Controllers
                 return BadRequest("Db fail.");
             }
         }
-        [HttpGet("get-sum-of-salaries/{companyId}")]
-        public async Task<IActionResult> GetSumOfSalaries(Guid companyId)
+        [HttpGet("get-sum-of-salaries/{companyId}/{date}")]
+        public async Task<IActionResult> GetSumOfSalaries(Guid companyId, DateTime date)
         {
             try
             {
@@ -136,12 +136,15 @@ namespace BM_API.Controllers
                 {
                     return BadRequest("Company id is null.");
                 }
-                var sum = await _companyEmployeeRepository.GetSumOfSalariesAsync(companyId);
+                var sum = await _companyEmployeeRepository.GetSumOfSalariesAsync(companyId,date);
+                if(sum==0)
+                {
+                    return NotFound("No salaries that need to be paid in this date.");
+                }
                 return Ok(sum);
             }
             catch (Exception ex)
             {
-                // Log the exception or handle it as needed
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
