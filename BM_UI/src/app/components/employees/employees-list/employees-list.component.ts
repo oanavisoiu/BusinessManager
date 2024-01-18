@@ -44,7 +44,6 @@ export class EmployeesListComponent implements OnInit {
             load: () => {
               return dataService.getAllEmployees(company.id).pipe(
                 catchError((error) => {
-                  console.error('Error loading employees:', error);
                   return of([]);
                 })
               ).toPromise();

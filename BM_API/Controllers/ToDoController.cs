@@ -4,6 +4,8 @@ using BM_API.Models;
 using BM_API.Repositories.RepositoryInterfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static System.Net.Mime.MediaTypeNames;
+using System.ComponentModel.Design;
 
 namespace BM_API.Controllers
 {
@@ -47,6 +49,7 @@ namespace BM_API.Controllers
                     RecurrenceRule = toDo.RecurrenceRule,
                     AllDay = toDo.AllDay,
                 };
+                
                 _toDoRepository.Add(toDoAdd);
                 if(await _toDoRepository.SaveChangesAsync())
                 {

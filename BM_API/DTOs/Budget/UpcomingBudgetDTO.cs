@@ -5,6 +5,6 @@
         public string Name { get; set; }
         public DateTime Date { get; set; }
         public string PaymentTypeName { get; set; }
-        public decimal Value { get; set; }
+        public double Value { get; set; }
     }
 }

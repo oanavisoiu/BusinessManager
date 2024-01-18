@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { BudgetService } from '../budget.service';
 import { CompanyService } from '../../company/company.service';
 import CustomStore from 'devextreme/data/custom_store';
-import { catchError, of, switchMap, take } from 'rxjs';
+import { catchError, of, switchMap } from 'rxjs';
 import { exportDataGrid } from 'devextreme/pdf_exporter';
 import jsPDF from 'jspdf';
 import { EmployeesService } from '../../employees/employees.service';
 import { DatePipe } from '@angular/common';
+import Decimal from 'decimal.js';
 
 @Component({
   selector: 'app-budget-list',
@@ -74,6 +75,16 @@ export class BudgetListComponent implements OnInit {
       this.formData.paymentType='Expense';
     }
   }
+  updateFormData(budget:Budget) {
+    this.formData = {
+        budgetType: budget.budgetTypeName || '',
+        name: budget.name || '',
+        date: budget.date ? new Date(budget.date) : new Date(),
+        createdDate: budget.createdDate,
+        value: budget.value || 0,
+        paymentType: budget.paymentTypeName || ''
+    };
+}
   changeBudgetDate(event: any) {
     if (event.value) {
         this.formData.date = this.formatDate(event.value);
@@ -97,11 +108,9 @@ export class BudgetListComponent implements OnInit {
     this.companyService.company$.subscribe((company) => {
       if (company) {
         this.currentDate=this.formatDate(this.currentDate);
-        console.log(this.currentDate);
         this.employeesService.getSumOfSalaries(company.id,this.currentDate).subscribe({
           next:(sum)=>{
             this.sumOfSalaries=sum;
-            console.log(this.sumOfSalaries);
           }
         })
         const dataService = this.budgetService;
@@ -109,10 +118,9 @@ export class BudgetListComponent implements OnInit {
           key: 'id',
           load: () => {
             return dataService
-              .getBudget(company.id)
+              .getBudgets(company.id)
               .pipe(
                 catchError((error) => {
-                  console.error('Error loading expenses:', error);
                   return of([]);
                 })
               )
@@ -123,6 +131,7 @@ export class BudgetListComponent implements OnInit {
               const newBudget: Budget = { ...values };
               newBudget.companyId = company.id;
               newBudget.budgetTypeName=this.formData.budgetType;
+              newBudget.date = this.formData.date;
               newBudget.value=this.formData.value;
               newBudget.paymentTypeName=this.formData.paymentType;
               dataService.addBudget(newBudget).subscribe({

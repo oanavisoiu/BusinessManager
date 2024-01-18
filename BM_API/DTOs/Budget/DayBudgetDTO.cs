@@ -2,8 +2,8 @@
 {
     public class DayBudgetDTO
     {
-        public decimal Income { get; set; }
-        public decimal Expense { get; set; }
+        public double Income { get; set; }
+        public double Expense { get; set; }
         public DateTime Date { get; set; }
     }
 }

@@ -39,9 +39,9 @@ namespace BM_API.Repositories
                 .Where(e => e.EndDate==null || e.EndDate>=date);
             return employees.ToList();
         }
-        public async Task<decimal> GetSumOfSalariesAsync(Guid companyId, DateTime date)
+        public async Task<double> GetSumOfSalariesAsync(Guid companyId, DateTime date)
         {
-            decimal sum = 0;
+            double sum = 0;
             var employees = await GetEmployeesWithEndDateAfterDateAsync(companyId,date);
 
             foreach (var employee in employees)

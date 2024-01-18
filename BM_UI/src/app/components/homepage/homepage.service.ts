@@ -1,7 +1,7 @@
 import { ToDoView } from 'src/app/shared/models/to-do/to-do-view.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UpcomingBudget } from 'src/app/shared/models/budget/upcoming-budget';
+import { UpcomingBudget } from 'src/app/shared/models/budget/upcoming-budget.model';
 import { EmployeeBirthday } from 'src/app/shared/models/employee/employee-birthday';
 import { environment } from 'src/environments/environment';
 

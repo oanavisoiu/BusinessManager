@@ -40,8 +40,8 @@ namespace BM_API.Repositories
 
             for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
             {
-                decimal income = 0;
-                decimal expense = 0;
+                double income = 0;
+                double expense = 0;
 
                 foreach (var budget in budgets)
                 {

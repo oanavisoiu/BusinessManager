@@ -32,7 +32,6 @@ export class ToDoCalendarComponent implements OnInit {
               .getToDos(company.id)
               .pipe(
                 catchError((error) => {
-                  console.error('Error loading to dos:', error);
                   return of([]);
                 })
               )
@@ -41,7 +40,6 @@ export class ToDoCalendarComponent implements OnInit {
           insert: (values: any) => {
             return new Promise<ToDo>((resolve, reject) => {
               const newToDo: ToDo = { ...values };
-              console.log(values);
               newToDo.companyId = company.id;
               if(values.description){
                 newToDo.description=values.description;
@@ -61,7 +59,6 @@ export class ToDoCalendarComponent implements OnInit {
               else{
                 newToDo.allDay=false;
               }
-              console.log(newToDo);
               dataService.addToDo(newToDo).subscribe({
                 next: (toDo:ToDo) => {
                   resolve(toDo);
@@ -111,4 +108,6 @@ export class ToDoCalendarComponent implements OnInit {
       }
     });
   }
+
+
 }

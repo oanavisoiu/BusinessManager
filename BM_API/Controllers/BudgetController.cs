@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using BM_API.DTOs.Budget;
+using BM_API.DTOs.EmployeeUpdateDto;
+using BM_API.DTOs.ToDo;
 using BM_API.Models;
+using BM_API.Repositories;
 using BM_API.Repositories.RepositoryInterfaces;
 using Mailjet.Client.Resources;
 using Microsoft.AspNetCore.Authorization;
@@ -25,6 +28,27 @@ namespace BM_API.Controllers
             _budgetTypeRepository = budgetTypeRepository;
             _companyEmployeeRepository = companyEmployeeRepository;
             _mapper = mapper;
+        }
+        [HttpGet("get-budget/{id}")]
+        public async Task<IActionResult> GetBudgetById(Guid id)
+        {
+            try
+            {
+                if (id.Equals(Guid.Empty))
+                {
+                    return BadRequest("Id is null");
+                }
+                Budget budget = await _budgetRepository.GetBudgetByIdAsync(id);
+                if (budget == null)
+                {
+                    return NotFound("Budget not found");
+                }
+                return Ok(budget);
+            }
+            catch (Exception)
+            {
+                return BadRequest("Db fail");
+            }
         }
         [HttpPost("add-budget")]
         public async Task<IActionResult> AddBudget([FromBody] Budget budget)
@@ -52,7 +76,7 @@ namespace BM_API.Controllers
                 if (budgetAdd.BudgetTypeName == "Salaries")
                 {
                     budgetAdd.PaymentTypeName = "Expense";
-                    budgetAdd.Value = -await _companyEmployeeRepository.GetSumOfSalariesAsync(budget.CompanyId, budgetAdd.Date);
+                    budgetAdd.Value = -budget.Value;
                 }
                 else if (budgetAdd.BudgetTypeName == "Other")
                 {
@@ -82,6 +106,42 @@ namespace BM_API.Controllers
             catch (Exception)
             {
                 return BadRequest();
+            }
+        }
+        [HttpPut("update-budget/{budgetId}")]
+        public async Task<IActionResult> UpdateToDo([FromRoute] Guid budgetId, [FromBody] BudgetDTO budget)
+        {
+            try
+            {
+                if (budgetId.Equals(Guid.Empty))
+                {
+                    return BadRequest("Budget id is null");
+                }
+                if (budget == null)
+                {
+                    return BadRequest("Budget is null");
+                }
+                Budget foundBudget = await _budgetRepository.GetBudgetByIdAsync(budgetId);
+                if (foundBudget == null)
+                {
+                    return NotFound("Budget not found");
+                }
+                foundBudget.BudgetTypeName = budget.BudgetTypeName;
+                foundBudget.Name = budget.Name;
+                foundBudget.Date=budget.Date;
+                foundBudget.CreatedDate = budget.CreatedDate;
+                foundBudget.Value = budget.Value;
+                foundBudget.PaymentTypeName = budget.PaymentTypeName;
+                _budgetRepository.Update(foundBudget);
+                if (await _budgetRepository.SaveChangesAsync())
+                {
+                    return Ok(foundBudget);
+                }
+                return BadRequest("Db fail");
+            }
+            catch (Exception)
+            {
+                return BadRequest("Db fail");
             }
         }
         [HttpGet("get-budgets-by-company-id/{id}")]

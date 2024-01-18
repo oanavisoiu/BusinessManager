@@ -4,6 +4,7 @@ import { environment } from "src/environments/environment";
 import { Budget } from "src/app/shared/models/budget/budget.model";
 import { BudgetType } from "src/app/shared/models/budget/budget-type.model";
 import { DayBudget } from "src/app/shared/models/budget/day-budget.model";
+import { UpdateBudget } from "src/app/shared/models/budget/update-budget.model";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,9 @@ export class BudgetService {
   constructor(private http:HttpClient) { }
 
   getBudget(id:string){
+    return this.http.get<Budget>(this.baseApiUrl+'/api/budget/get-budget/'+id);
+  }
+  getBudgets(id:string){
     return this.http.get<Budget[]>(this.baseApiUrl+'/api/budget/get-budgets-by-company-id/'+id);
   }
   addBudget(budget:Budget){
@@ -34,5 +38,8 @@ export class BudgetService {
   }
   getDayBudgets(id:string){
     return this.http.get<DayBudget[]>(this.baseApiUrl+'/api/budget/get-day-budgets/'+id);
+  }
+  updateBudget(id:string, budget:UpdateBudget){
+    return this.http.put<UpdateBudget>(this.baseApiUrl+'/api/budget/update-budget/'+id,budget);
   }
 }

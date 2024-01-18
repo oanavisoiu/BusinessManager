@@ -38,7 +38,7 @@ namespace BM_API.DTOs.EmployeeUpdateDto
         public DateTime? EndDate { get; set; }
 
         [Required]
-        public long Salary { get; set; }
+        public double Salary { get; set; }
 
         [Required]
         public string? Department { get; set; }

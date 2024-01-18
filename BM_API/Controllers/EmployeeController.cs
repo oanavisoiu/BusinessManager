@@ -67,7 +67,7 @@ namespace BM_API.Controllers
         }
 
         [HttpPut("update-employee/{id}")]
-        public async Task<IActionResult> UpdateEmployee([FromRoute] Guid id,[FromBody] DTOs.EmployeeUpdateDto.EmployeeUpdateDTO updatedEmployee)
+        public async Task<IActionResult> UpdateEmployee([FromRoute] Guid id,[FromBody] EmployeeUpdateDTO updatedEmployee)
         {
             try
             {

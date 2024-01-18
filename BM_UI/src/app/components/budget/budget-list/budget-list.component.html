@@ -16,7 +16,7 @@
             [showInfo]="true" [showNavigationButtons]="true">
           </dxo-pager>
 
-          <dxo-editing mode="popup" title="Budget info" [allowAdding]="true" [allowDeleting]="true">
+          <dxo-editing mode="popup" title="Budget info" [allowAdding]="true" [allowDeleting]="true" [allowUpdating]="true">
             <dxo-popup title="Budget Info" [showTitle]="true" [width]="700"></dxo-popup>
             <dxo-form [colCount]="1" [formData]="formData">
 
@@ -25,25 +25,29 @@
                 <div *dxTemplate="let data of 'budgetTypeTemplate'">
                   <dx-lookup  [dataSource]="budgetTypes" [(value)]="formData.budgetType" (onValueChanged)="changeBudgetType($event)"></dx-lookup>
                 </div>
+                <dxi-validation-rule type="required"></dxi-validation-rule>
               </dxi-item>
 
               <dxi-item dataField="name" >
+                <dxi-validation-rule type="required"></dxi-validation-rule>
               </dxi-item>
 
               <dxi-item dataField="date" template="dateTemplate" caption="Date" editorType="dxDateBox" >
                 <div *dxTemplate="let data of 'dateTemplate'">
                   <dx-date-box [(value)]="formData.date" (onValueChanged)="changeBudgetDate($event)"></dx-date-box>
                 </div>
+                <dxi-validation-rule type="required"></dxi-validation-rule>
               </dxi-item>
 
               <dxi-item dataField="createdDate" caption="Created Date" editorType="dxDateBox"
                 [editorOptions]="{ placeholder: todayDate }">
               </dxi-item>
 
-              <dxi-item dataField="value" template="template" caption="Value" dataType="currency">
+              <dxi-item dataField="value" template="template" caption="Value" dataType="number">
                 <div *dxTemplate="let data of 'template'">
-                  <dx-number-box [(value)]="formData.value" [disabled]="isBudgetTypeNameSalaries"></dx-number-box>
+                  <dx-number-box [(value)]="formData.value"></dx-number-box>
                 </div>
+                <dxi-validation-rule type="required"></dxi-validation-rule>
               </dxi-item>
 
               <dxi-item dataField="paymentTypeName" template="paymentTypeTemplate" editorType="dxSelectBox" [editorOptions]="{ items: paymentTypes }">
@@ -51,6 +55,7 @@
                 <div *dxTemplate="let data of 'paymentTypeTemplate'">
                   <dx-lookup  [dataSource]="paymentTypes" [(value)]="formData.paymentType" [disabled]="isBudgetTypeNameSalaries"></dx-lookup>
                 </div>
+                <dxi-validation-rule type="required"></dxi-validation-rule>
               </dxi-item>
 
             </dxo-form>
@@ -61,14 +66,15 @@
           <dxi-column dataField="date" dataType="date" caption="Date"></dxi-column>
           <dxi-column dataField="createdDate" dataType="date" caption="Created date"
             [allowEditing]="false"></dxi-column>
-          <dxi-column dataField="value" caption="Value"></dxi-column>
+          <dxi-column dataField="value" caption="Value" type="currency"><dxo-format type="fixedPoint" precision="2"></dxo-format></dxi-column>
           <dxi-column dataField="paymentTypeName" caption="Payment type"></dxi-column>
 
           <dxi-column type="buttons" caption="Actions">
             <dxi-button name="delete" icon="bi bi-trash"></dxi-button>
           </dxi-column>
           <dxo-summary>
-            <dxi-total-item column="value" summaryType="sum"></dxi-total-item>
+            <dxi-total-item column="value" summaryType="sum" [valueFormat]="{  precision: 2}">
+            </dxi-total-item>
           </dxo-summary>
           <dxo-export [enabled]="true" [formats]="['pdf']" [allowExportSelectedData]="true"></dxo-export>
         </dx-data-grid>

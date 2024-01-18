@@ -12,7 +12,7 @@ namespace BM_API.Models
         [Required]
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         [Required]
-        public decimal Value { get; set; }
+        public double Value { get; set; }
         [Required]
         public string PaymentTypeName { get; set; }
         [Required]

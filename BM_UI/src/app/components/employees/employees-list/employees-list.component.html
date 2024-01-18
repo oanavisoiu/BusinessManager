@@ -50,15 +50,14 @@
             <dxi-validation-rule type="required"></dxi-validation-rule>
           </dxi-column>
           <dxi-column dataField="endDate" caption="End Date" dataType="date">
-            <!-- <dxi-validation-rule type="range" [min]="minDate"
-              message="End date can't be before today's date. "></dxi-validation-rule> -->
           </dxi-column>
           <dxi-column dataField="department" caption="Department">
             <dxi-validation-rule type="required"></dxi-validation-rule>
           </dxi-column>
-          <dxi-column dataField="salary" caption="Salary" dataType="Number">
+          <dxi-column dataField="salary" caption="Salary" dataType="currency">
             <dxi-validation-rule type="required"></dxi-validation-rule>
-          </dxi-column>
+            <dxo-format type="fixedPoint" precision="2"></dxo-format>
+        </dxi-column>
           <dxi-column type="buttons" caption="Actions">
             <dxi-button name="edit" icon="bi bi-pencil-square"></dxi-button>
             <dxi-button name="delete" icon="bi bi-trash"></dxi-button>

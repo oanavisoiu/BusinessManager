@@ -3,9 +3,15 @@
     <div class="card-body">
       <h4>Schedule</h4>
       <hr class="solid">
-      <dx-scheduler class="custom-scheduler-size" *ngIf="(companyService.company$ | async)" timeZone="Europe/Bucharest" [views]="['day', 'week', 'workWeek', 'month']" [dataSource]="toDos"
+      <dx-scheduler *ngIf="(companyService.company$ | async)" timeZone="Europe/Bucharest" [views]="['day', 'week', 'workWeek', 'month']" [dataSource]="toDos"
         currentView="month" [currentDate]="currentDate" [firstDayOfWeek]="1" [startDayHour]="00" [endDayHour]="23"
-        [showAllDayPanel]="false" [height]="500">
+        [showAllDayPanel]="false" [height]="500" appointmentTemplate="appointment">
+
+        <div class="appointment" *dxTemplate="let data of 'appointment'">
+          {{data.appointmentData.text}}
+        </div>
+
+
       </dx-scheduler>
       <div *ngIf="!(companyService.company$ | async)">
         <app-company-not-set></app-company-not-set>

@@ -36,8 +36,10 @@
 
           </dxi-column>
 
-          <dxi-column dataField="link" caption="Link">
-
+          <dxi-column dataField="link" caption="Link" cellTemplate="template">
+            <div *dxTemplate="let data of 'template'">
+              <a [href]="data.value" target="_blank">{{data.value}}</a>
+            </div>
           </dxi-column>
 
           <dxi-column type="buttons" caption="Actions">

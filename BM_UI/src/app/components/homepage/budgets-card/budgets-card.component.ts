@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UpcomingBudget } from 'src/app/shared/models/budget/upcoming-budget';
+import { UpcomingBudget } from 'src/app/shared/models/budget/upcoming-budget.model';
 import { CompanyService } from '../../company/company.service';
 import { HomepageService } from '../homepage.service';
 import { Company } from 'src/app/shared/models/company/company.model';

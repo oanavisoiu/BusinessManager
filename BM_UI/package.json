@@ -23,6 +23,7 @@
     "@popperjs/core": "^2.10.2",
     "bootstrap": "^5.2.0",
     "bootstrap-icons": "^1.11.3",
+    "decimal.js": "^10.4.3",
     "devextreme": "23.1.6",
     "devextreme-angular": "23.1.6",
     "exceljs": "^4.4.0",
