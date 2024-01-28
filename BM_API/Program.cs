@@ -84,7 +84,6 @@ builder.Services.AddTransient<IBudgetRepository, BudgetRepository>();
 builder.Services.AddTransient<IPaymentTypeRepository, PaymentTypeRepository>();
 builder.Services.AddTransient<IBudgetTypeRepository, BudgetTypeRepository>();
 builder.Services.AddTransient<IToDoRepository,ToDoRepository>();
-//builder.Services.AddTransient<IProductRepository, ProductRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
