@@ -157,7 +157,7 @@ namespace BM_API.Controllers
                 ICollection<Employee> employees = await _companyEmployeeRepository.GetEmployeesBirthdaysForAMonthAsync(companyId);
                 if (employees.Count <= 0)
                 {
-                    return NotFound("Employees not found");
+                    return Ok("Employees not found");
                 }
                 foreach (var employee in employees)
                 {

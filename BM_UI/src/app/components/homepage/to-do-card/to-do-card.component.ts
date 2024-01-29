@@ -28,6 +28,8 @@ export class ToDoCardComponent implements OnInit {
             next: (td) => {
               this.today = td;
             },
+            error:(err)=>{
+            }
           });
         }
       },
@@ -41,6 +43,9 @@ export class ToDoCardComponent implements OnInit {
             next: (up) => {
               this.upcoming = up;
             },
+            error:(err)=>{
+
+            }
           });
         }
       },

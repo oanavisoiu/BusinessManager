@@ -200,7 +200,7 @@ namespace BM_API.Controllers
                 ICollection<Budget> budgets = await _budgetRepository.GetUpcomingBudgetsAsync(companyId);
                 if(budgets.Count <= 0)
                 {
-                    return NotFound("Upcoming budgets bot found");
+                    return Ok("Upcoming budgets not found");
                 }
                 foreach (var budget in budgets)
                 {

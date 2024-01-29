@@ -65,6 +65,9 @@ export class BudgetListComponent implements OnInit {
       next: (pt) => {
         this.paymentTypes = pt;
       },
+      error:(err)=>{
+
+      }
     });
   }
   changeBudgetType(event:any){
@@ -111,6 +114,9 @@ export class BudgetListComponent implements OnInit {
         this.employeesService.getSumOfSalaries(company.id,this.currentDate).subscribe({
           next:(sum)=>{
             this.sumOfSalaries=sum;
+          },
+          error:(err)=>{
+
           }
         })
         const dataService = this.budgetService;

@@ -25,6 +25,9 @@ export class BirthdaysCardComponent implements OnInit {
             next: (eb) => {
               this.birthdays = eb;
             },
+            error:(err)=>{
+
+            }
           });
         }
       },

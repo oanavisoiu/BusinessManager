@@ -27,7 +27,6 @@ export class BudgetsCardComponent implements OnInit {
               this.budgets = b;
             },
             error:(err)=>{
-              console.log(err);
             }
           });
         }

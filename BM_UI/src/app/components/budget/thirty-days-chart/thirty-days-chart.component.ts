@@ -20,7 +20,7 @@ export class ThirtyDaysChartComponent implements OnInit {
   }
   formatDate(budgets: DayBudget[]): DayBudget[] {
     return budgets.map(budget => {
-      if (budget.date) { // Check if date is not null
+      if (budget.date) {
         const formattedDate = this.datePipe.transform(new Date(budget.date), 'MM/d/yyyy');
         budget.date = formattedDate ? new Date(formattedDate) : budget.date;
       }
@@ -33,12 +33,9 @@ export class ThirtyDaysChartComponent implements OnInit {
         if(company){
           this.budgetService.getDayBudgets(company?.id).subscribe({
             next: (budgets) => {
-              //this.dataSource = budgets;
               this.dataSource = this.formatDate(budgets);
-              console.log('Data Source:', this.dataSource);
             },
             error: (err) => {
-              console.error('Error fetching data:', err);
             }
           });
         }

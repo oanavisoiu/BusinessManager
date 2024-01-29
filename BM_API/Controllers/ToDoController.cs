@@ -195,7 +195,7 @@ namespace BM_API.Controllers
                 ICollection<ToDo> toDos = await _toDoRepository.GetTodayToDosAsync(companyId);
                 if (toDos.Count <= 0)
                 {
-                    return NotFound("To dos not found");
+                    return Ok("To dos not found");
                 }
                 foreach (ToDo toDo in toDos)
                 {
@@ -227,7 +227,7 @@ namespace BM_API.Controllers
                 ICollection<ToDo> toDos = await _toDoRepository.GetUpcomingToDosAsync(companyId);
                 if (toDos.Count <= 0)
                 {
-                    return NotFound("To dos not found");
+                    return Ok("To dos not found");
                 }
                 foreach (ToDo toDo in toDos)
                 {
