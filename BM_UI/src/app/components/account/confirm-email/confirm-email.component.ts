@@ -30,7 +30,6 @@ export class ConfirmEmailComponent implements OnInit {
                 email: params.get('email'),
 
               }
-              console.log(params.get('token'));
 
               this.accountService.confirmEmail(confirmEmail).subscribe({
                 next:(response:any)=>{

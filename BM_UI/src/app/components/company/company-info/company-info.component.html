@@ -1,10 +1,6 @@
-<div class="modal-header">
-  <h5 class="modal-title">Company Info</h5>
-  <button type="button" class="btn-close" (click)="onButtonClose()"></button>
-</div>
-<div class="modal-body">
-  <form #form="ngForm" (submit)="addCompany()">
-    <dx-form [(formData)]="company">
+
+  <form #form="ngForm" (submit)="updateCompany()">
+    <dx-form [(formData)]="companyForm">
       <dxi-item dataField="name" editorType="dxTextBox" [editorOptions]="{ placeholder: 'Name' }">
         <dxi-validation-rule type="required">
 
@@ -14,8 +10,11 @@
       </dxi-item>
       <dxi-item dataField="phoneNumber" editorType="dxTextBox" [editorOptions]="{ placeholder: 'Phone Number' }">
       </dxi-item>
-      <dxi-item class="save" itemType="button" [buttonOptions]="saveButtonOptions">
+      <dxi-item template="template">
+        <div class="my-3" *dxTemplate>
+          <dx-button class="me-3 save" text="Save" [useSubmitBehavior]="true"></dx-button>
+          <dx-button class="delete" text="Delete company" (onClick)="deleteCompany()"></dx-button>
+        </div>
       </dxi-item>
     </dx-form>
   </form>
-</div>

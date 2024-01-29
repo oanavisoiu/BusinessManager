@@ -93,7 +93,6 @@ export class RegisterComponent implements OnInit {
         error: (error) => {
           if(error.error.errors){
             this.errorMessages=error.error.errors;
-            console.log(error.error.errors);
           }
           else{
             this.errorMessages.push(error.error);

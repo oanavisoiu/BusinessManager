@@ -29,13 +29,10 @@ export class AddCompanyComponent implements OnInit {
     this.companyService.addCompany(this.company)?.subscribe({
 
       next:(tmpCompany)=>{
-        console.log(this.company);
         this.modalService.dismissAll();
         this.router.navigate(['']);
       },
       error:(err)=>{
-        console.log(this.company);
-        console.log(err);
       }
     });
     this.accountService.user$.subscribe({

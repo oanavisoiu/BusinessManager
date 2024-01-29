@@ -69,14 +69,12 @@ export class LoginComponent implements OnInit {
           if(this.returnUrl){
             this.router.navigateByUrl(this.returnUrl);
           }else{
-            //this.router.navigateByUrl('/');
           }
         },
         error: (error) => {
           console.log(error);
           if(error.error.errors){
             this.errorMessages=error.error.errors;
-            console.log(error.error.errors);
           }
           else{
             this.errorMessages.push(error.error);

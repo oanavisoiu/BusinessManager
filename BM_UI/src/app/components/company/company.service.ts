@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, map, switchMap } from 'rxjs';
 import { Company } from 'src/app/shared/models/company/company.model';
+import { UpdateCompany } from 'src/app/shared/models/company/update-company.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -37,6 +38,21 @@ export class CompanyService {
         })
       );
   }
+  updateCompany(updateCompany: UpdateCompany) {
+    return this.http.put<UpdateCompany>(this.baseApiUrl + '/api/company/update-company', updateCompany).pipe(
+      switchMap(() => this.getCompany())
+    );
+  }
+  deleteCompany() {
+    return this.http.delete<Company>(this.baseApiUrl + '/api/company/delete-company').pipe(
+      map((company: Company) => {
+        if (company) {
+          this.resetCompany();
+        }
+      })
+    );
+  }
+
   resetCompany() {
     this.companySubject.next(null);
   }

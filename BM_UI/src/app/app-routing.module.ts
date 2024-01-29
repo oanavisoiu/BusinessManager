@@ -51,6 +51,14 @@ const routes: Routes = [
       ),
     canActivate:[AuthorizationGuard]
   },
+  {
+    path: 'profile',
+    loadChildren: () =>
+      import('./components/profile/profile.module').then(
+        (module) => module.ProfileModule
+      ),
+    canActivate:[AuthorizationGuard]
+  },
   { path: '**', component: NotFoundComponent, pathMatch:'full' },
 ];
 

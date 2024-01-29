@@ -71,10 +71,17 @@
               <div class="" *ngIf="rlaToDo.isActive"><i class="bi bi-arrow-right"></i></div>
             </div>
           </button>
+
           <div class="flex-grow-1"></div>
 
-          <!-- Logout Button -->
-          <button class="btn mt-1 py-2 menu-item" (click)="onLogout()">
+          <button class="btn py-2 menu-item" routerLink="/profile" #rlaProf="routerLinkActive"
+            routerLinkActive="active-link">
+            <div class="button-content">
+              <div class=""><i class="bi bi-person-fill"></i> Profile</div>
+              <div class="" *ngIf="rlaProf.isActive"><i class="bi bi-arrow-right"></i></div>
+            </div>
+          </button>
+          <button class="btn py-2 menu-item" (click)="onLogout()">
             <div class="button-content">
               <div class=""><i class="bi bi-box-arrow-right"></i> Log out</div>
             </div>

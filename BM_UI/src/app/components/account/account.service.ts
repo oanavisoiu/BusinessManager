@@ -43,7 +43,6 @@ export class AccountService {
             this.companyService.getCompany().subscribe(
               (company) => {},
               (error) => {
-                console.error(error);
               }
             );
           }
@@ -67,7 +66,6 @@ export class AccountService {
             this.companyService.getCompany().subscribe(
               (company) => {},
               (error) => {
-                console.error('Error retrieving company data:', error);
               }
             );
           }
@@ -118,7 +116,6 @@ export class AccountService {
 
     this.user$.subscribe({
       next: (response) => {
-        //console.log(response);
       },
     });
   }

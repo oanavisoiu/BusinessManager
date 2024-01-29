@@ -33,7 +33,6 @@ export class SendEmailComponent implements OnInit {
           const mode=this.activatedRoute.snapshot.paramMap.get('mode');
           if(mode){
             this.mode=mode;
-            console.log(this.mode);
             this.initializeForm();
           }
         }
@@ -67,7 +66,6 @@ export class SendEmailComponent implements OnInit {
           error:error=>{
             if(error.error.errors){
               this.errorMessages=error.error.errors;
-              console.log(error.error.errors);
             }
             else{
               this.errorMessages.push(error.error);
@@ -84,7 +82,6 @@ export class SendEmailComponent implements OnInit {
           error:error=>{
             if(error.error.errors){
               this.errorMessages=error.error.errors;
-              console.log(error.error.errors);
             }
             else{
               this.errorMessages.push(error.error);
